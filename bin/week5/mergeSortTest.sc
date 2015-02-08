@@ -43,9 +43,9 @@ object mergeSortTest {
    * Here is the implementation of that algorithm in Scala:
    */
   def mSort(xs: List[Int]): List[Int] = {
-    val n = xs.length / 2
+    val n = xs.length / 2 //fraction / reminder is ommited / trown away
 
-    if (n == 0) {
+    if (n == 0) {//xs.length = 0 or 1 so, it already sorted
       xs
     } else {
       //def merge(xs: List[Int], ys: List[Int]) = ???
@@ -74,4 +74,7 @@ object mergeSortTest {
   mSort(unsortedNums) //works with merge1 & 2     //> res3: List[Int] = List(0, 1, 2, 3, 4, 5, 6, 7, 9)
   merge1(fst1, snd2)                              //> res4: List[Int] = List(6, 5, 0, 3, 7, 1, 2, 9, 4)
   merge2(fst1, snd2)                              //> res5: List[Int] = List(6, 5, 0, 3, 7, 1, 2, 9, 4)
+  0/2                                             //> res6: Int(0) = 0
+  1/2                                             //> res7: Int(0) = 0
+  2/2                                             //> res8: Int(1) = 1
 }

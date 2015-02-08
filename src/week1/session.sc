@@ -83,8 +83,10 @@ object session {
   gcd(14, 21)                                     //> res4: Int = 7
   14 % 21                                         //> res5: Int(14) = 14
 
-  //Note: explisit type of recursive function needed
-  //else, error trowing on compiling
+  /*Note:
+  explisit type of recursive function needed
+  else,
+  error trowing on compiling*/
   //Note: recursion depth and stack overflow
   /** non Tail recursive Implementation */
   /*def factorial(n: Int): Int =

@@ -36,16 +36,16 @@ object mergeSortTest {;import org.scalaide.worksheet.runtime.library.WorksheetSu
         } else {
           y :: merge2(xs, ys1)
         }
-    };System.out.println("""merge2: (xs: List[Int], ys: List[Int])List[Int]""");$skip(670); 
+    };System.out.println("""merge2: (xs: List[Int], ys: List[Int])List[Int]""");$skip(758); 
 
   /**
    * First MergeSort Implementation
    * Here is the implementation of that algorithm in Scala:
    */
   def mSort(xs: List[Int]): List[Int] = {
-    val n = xs.length / 2
+    val n = xs.length / 2 //fraction / reminder is ommited / trown away
 
-    if (n == 0) {
+    if (n == 0) {//xs.length = 0 or 1 so, it already sorted
       xs
     } else {
       //def merge(xs: List[Int], ys: List[Int]) = ???
@@ -72,5 +72,8 @@ object mergeSortTest {;import org.scalaide.worksheet.runtime.library.WorksheetSu
   ((unsortedNums take 4), (unsortedNums drop 4));System.out.println("""res2: (List[Int], List[Int]) = """ + $show(res$2));$skip(46); val res$3 = 
   mSort(unsortedNums);System.out.println("""res3: List[Int] = """ + $show(res$3));$skip(21); val res$4 =  //works with merge1 & 2
   merge1(fst1, snd2);System.out.println("""res4: List[Int] = """ + $show(res$4));$skip(21); val res$5 = 
-  merge2(fst1, snd2);System.out.println("""res5: List[Int] = """ + $show(res$5))}
+  merge2(fst1, snd2);System.out.println("""res5: List[Int] = """ + $show(res$5));$skip(6); val res$6 = 
+  0/2;System.out.println("""res6: Int(0) = """ + $show(res$6));$skip(6); val res$7 = 
+  1/2;System.out.println("""res7: Int(0) = """ + $show(res$7));$skip(6); val res$8 = 
+  2/2;System.out.println("""res8: Int(1) = """ + $show(res$8))}
 }

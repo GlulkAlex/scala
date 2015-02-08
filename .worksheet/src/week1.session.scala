@@ -62,7 +62,7 @@ object session {;import org.scalaide.worksheet.runtime.library.WorksheetSupport.
 
   sqrt(2);System.out.println("""res1: Double = """ + $show(res$1));$skip(10); val res$2 = 
   sqrt(4);System.out.println("""res2: Double = """ + $show(res$2));$skip(10); val res$3 = 
-  sqrt(9);System.out.println("""res3: Double = """ + $show(res$3));$skip(308); 
+  sqrt(9);System.out.println("""res3: Double = """ + $show(res$3));$skip(312); 
   //sqrt(0.1e-20)
   //sqrt(1.0e20)
   //sqrt(1.0e50)
@@ -81,10 +81,12 @@ object session {;import org.scalaide.worksheet.runtime.library.WorksheetSupport.
       gcd(b, a % b);System.out.println("""gcd: (a: Int, b: Int)Int""");$skip(16); val res$4 = 
 
   gcd(14, 21);System.out.println("""res4: Int = """ + $show(res$4));$skip(10); val res$5 = 
-  14 % 21;System.out.println("""res5: Int(14) = """ + $show(res$5));$skip(725); 
+  14 % 21;System.out.println("""res5: Int(14) = """ + $show(res$5));$skip(729); 
 
-  //Note: explisit type of recursive function needed
-  //else, error trowing on compiling
+  /*Note:
+  explisit type of recursive function needed
+  else,
+  error trowing on compiling*/
   //Note: recursion depth and stack overflow
   /** non Tail recursive Implementation */
   /*def factorial(n: Int): Int =
