@@ -2,16 +2,16 @@
 package week4 {
 
   object anon_fun_demo {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(127); 
-    println("Welcome to the Scala worksheet");$skip(81); 
+    println("Welcome to the Scala worksheet");$skip(86); 
 
-		//?return type deduced from
-		//?function body
+    //?return type deduced from
+    //?function body
     val f1 = (x: Int) => x * x;System.out.println("""f1  : Int => Int = """ + $show(f1 ));$skip(10); val res$0 = 
-    f1(3);System.out.println("""res0: Int = """ + $show(res$0));$skip(178); 
+    f1(3);System.out.println("""res0: Int = """ + $show(res$0));$skip(185); 
 
-		//?<function1> generic type
-		//?arg(0) for input parameter type
-		//?arg(1) for return value type
+    //?<function1> generic type
+    //?arg(0) for input parameter type
+    //?arg(1) for return value type
     val f = new Function1[Int, Int] {
       def apply(x: Int) = x * x
     };System.out.println("""f  : Int => Int = """ + $show(f ));$skip(15); val res$1 = 

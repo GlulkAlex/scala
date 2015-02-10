@@ -4,14 +4,14 @@ package week4 {
   object anon_fun_demo {
     println("Welcome to the Scala worksheet")     //> Welcome to the Scala worksheet
 
-		//?return type deduced from
-		//?function body
+    //?return type deduced from
+    //?function body
     val f1 = (x: Int) => x * x                    //> f1  : Int => Int = <function1>
     f1(3)                                         //> res0: Int = 9
 
-		//?<function1> generic type
-		//?arg(0) for input parameter type
-		//?arg(1) for return value type
+    //?<function1> generic type
+    //?arg(0) for input parameter type
+    //?arg(1) for return value type
     val f = new Function1[Int, Int] {
       def apply(x: Int) = x * x
     }                                             //> f  : Int => Int = <function1>

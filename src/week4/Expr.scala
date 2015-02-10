@@ -186,8 +186,8 @@ case class Var(x: String) extends Expr // Variable ‘x’
 
 /* 
  * Special syntax exists for procedures, 
- * i.e. functions that return the Unit value ()
- * def f(ps) {stats} is equivalent to def f(ps): Unit = {stats}. */
+ * i.e. functions that return the 'Unit' value ()
+ * def f(ps) {stats} 'is equivalent / <=> to' def f(ps): Unit = {stats}. */
 object testExpr {
   //*object testExpr extends Expr{
   //out of 'trait' scope
