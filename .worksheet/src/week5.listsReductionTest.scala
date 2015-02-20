@@ -23,7 +23,8 @@ object listsReductionTest {;import org.scalaide.worksheet.runtime.library.Worksh
   /*'z' = 0 is accumulator and default value if 'xs'== Nil*/
   def sum4(xs: List[Int]) = (xs foldLeft 0)(_ + _);System.out.println("""sum4: (xs: List[Int])Int""");$skip(57); 
 
-  def product4(xs: List[Int]) = (xs foldLeft 1)(_ * _);System.out.println("""product4: (xs: List[Int])Int""");$skip(84); 
+  def product4(xs: List[Int]) = (xs foldLeft 1)(_ * _);System.out.println("""product4: (xs: List[Int])Int""");$skip(121); 
+  /*concatenation or '++' or ':::'*/
   def concat1[T](xs: List[T], ys: List[T]): List[T] =
     (xs foldRight ys)(_ :: _);System.out.println("""concat1: [T](xs: List[T], ys: List[T])List[T]""");$skip(99); 
 
@@ -31,7 +32,7 @@ object listsReductionTest {;import org.scalaide.worksheet.runtime.library.Worksh
     (xs foldLeft ys)((xs, ys) => ys :: xs);System.out.println("""concat2: [T](xs: List[T], ys: List[T])List[T]""");$skip(99); 
 
   def concat3[T](xs: List[T], ys: List[T]): List[T] =
-    (xs foldLeft ys)((ys, xs) => xs :: ys);System.out.println("""concat3: [T](xs: List[T], ys: List[T])List[T]""");$skip(1357); 
+    (xs foldLeft ys)((ys, xs) => xs :: ys);System.out.println("""concat3: [T](xs: List[T], ys: List[T])List[T]""");$skip(1945); 
 
   /*
 	List(x1, ..., xn) reduceLeft op = (...(x1 op x2) op ... ) op xn
@@ -66,10 +67,23 @@ object listsReductionTest {;import org.scalaide.worksheet.runtime.library.Worksh
     (xs foldLeft ys)((as, bs) => as :: bs)//error: '::' not a member of 'T'*/
 
   /**Reversing list at linear cost, using 'foldLeft':*/
+  /* black magic here:
+  'foldLeft' takes 'List[T]()' as parameter of type 'B'
+  applyed on list & presumebly 'B' is list subtype,
+  but still -
+  how parameter passed without indentifier ?
+  only as type with block placeholder '()'
+  type of 'op' is equal / correspond, match, meet, fit, 'conform'
+  of type List[T] - first function parameter & host / holder of 'foldLeft' method */
+  /* ? 'inheritance' 'binding' ?*/
+  /* ? referenced entity ? */
+  /* ?  type constructors, which take type parameters and yield types ? */
+  /* ? InfixType ? */
+  /* ? Non-Value Types: Method Types ? */
   //def reverse[T](xs: List[T]): List[T] = (xs foldLeft z?)(op?)
-  def reverse1[T](xs: List[T]): List[T] = (xs foldLeft List[T]())((xs, x) => x :: xs);System.out.println("""reverse1: [T](xs: List[T])List[T]""");$skip(786); 
+  def reverse1[T](xs: List[T]): List[T] = (xs foldLeft List[T]())((xs, x) => x :: xs);System.out.println("""reverse1: [T](xs: List[T])List[T]""");$skip(745); 
   //def reverse2[T](xs: List[T]): List[T] = (xs foldLeft List[T]())(_ :: _)
-  //Note: List[T]() needed / necessary for type inference
+  /*Note: List[T]() needed / necessary for type inference*/
   //? () Unit / Block placeHolder for curring operator function ?
   /* 'Reverse' deduction
     computing output cases:
@@ -87,7 +101,31 @@ object listsReductionTest {;import org.scalaide.worksheet.runtime.library.Worksh
         so, using '::' operator with swapped operands
 		*/
 
-  /** using 'foldRight' implement / define : */
+  def foldRight2[T, U](z: U, xs: List[T])(op: (T, U) => U): U = xs match {
+    case Nil => z
+    case y :: ys => op(y, (foldRight2(z, ys))(op))
+  };System.out.println("""foldRight2: [T, U](z: U, xs: List[T])(op: (T, U) => U)U""");$skip(204); 
+
+  /*no type inference / deduction for 'op' parameters*/
+  def foldRight3[T, U](z: U, xs: List[T], op: (T, U) => U): U = xs match {
+    case Nil => z
+    case y :: ys => op(y, foldRight3(z, ys, op))
+  };System.out.println("""foldRight3: [T, U](z: U, xs: List[T], op: (T, U) => U)U""");$skip(195); 
+
+  def foldLeft2[T, U](z: U, xs: List[T])(op: (U, T) => U): U = xs match {
+    case Nil => z
+    //case x :: xs => (xs foldLeft op(z, x))(op)
+    case y :: ys => foldLeft2(op(z, y), ys)(op)
+  };System.out.println("""foldLeft2: [T, U](z: U, xs: List[T])(op: (U, T) => U)U""");$skip(251); 
+
+  /* from 'foldLeft2': ys is 'U', y is 'T' & 'U' is list from
+  ? 'List[T]()' ? and 'y :: ys'
+  ? is 'List[T]()' bind / passed to 'ys' indentifier as its type ?*/
+  def reverse2[T](xs: List[T]): List[T] = foldLeft2(List[T](), xs)((ys, y) => y :: ys);System.out.println("""reverse2: [T](xs: List[T])List[T]""");$skip(203); 
+  /*? anonymus indentifiers ?
+  after test: 'List[T]()' - stands for empty list 'List()' for / of type 'T'*/
+  def reverse3[T](xs: List[T]): List[T] = foldLeft2(List[T](), List[T]())((ys, y) => y :: ys);System.out.println("""reverse3: [T](xs: List[T])List[T]""");$skip(190); 
+  /** using 'foldRight' implement / define: */
   def mapFun[T, U](xs: List[T], f: T => U): List[U] =
     //*(xs foldRight List[U]())(???)
     (xs foldRight List[U]())((y, ys) => f(y) :: ys);System.out.println("""mapFun: [T, U](xs: List[T], f: T => U)List[U]""");$skip(162); 
@@ -118,5 +156,14 @@ object listsReductionTest {;import org.scalaide.worksheet.runtime.library.Worksh
   lengthFun(Nil);System.out.println("""res14: Int = """ + $show(res$14));$skip(39); val res$15 = 
   mapFun(intList, ((x: Int) => x * x));System.out.println("""res15: List[Int] = """ + $show(res$15));$skip(42); val res$16 = 
   consecList map ((x: String) => x + "1");System.out.println("""res16: List[String] = """ + $show(res$16));$skip(55); val res$17 = 
-  mapFun(consecList, ((x: String) => x.toUpperCase()));System.out.println("""res17: List[String] = """ + $show(res$17))}
+  mapFun(consecList, ((x: String) => x.toUpperCase()));System.out.println("""res17: List[String] = """ + $show(res$17));$skip(20); 
+  val isNull = null;System.out.println("""isNull  : Null = """ + $show(isNull ));$skip(37); 
+  val symbolLiteral = 'symbolLiteral;System.out.println("""symbolLiteral  : Symbol = """ + $show(symbolLiteral ));$skip(44); val res$18 = 
+  (consecList foldRight 0)((x, z) => z + 1);System.out.println("""res18: Int = """ + $show(res$18));$skip(45); val res$19 = 
+  foldRight2(0, consecList)((x, z) => z + 1);System.out.println("""res19: Int = """ + $show(res$19));$skip(58); val res$20 = 
+  foldRight3(0, consecList, (x: String, z: Int) => z + 1);System.out.println("""res20: Int = """ + $show(res$20));$skip(31); val res$21 = 
+  foldLeft2(0, intList)(_ + _);System.out.println("""res21: Int = """ + $show(res$21));$skip(20); val res$22 = 
+  reverse2(intList);System.out.println("""res22: List[Int] = """ + $show(res$22));$skip(23); val res$23 = 
+  reverse2(consecList);System.out.println("""res23: List[String] = """ + $show(res$23));$skip(23); val res$24 = 
+  reverse3(consecList);System.out.println("""res24: List[String] = """ + $show(res$24))}
 }

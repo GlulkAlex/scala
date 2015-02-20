@@ -54,10 +54,10 @@ abstract class IntSet {
   }
 }*/
 
-//or for simplisity
+/*or for simplisity
 //use / defines a singleton object
 //created by first reference to it
-//Singleton objects are values, so 'Empty' evaluates to itself.
+//Singleton objects are values, so 'Empty' evaluates to itself.*/
 //?object and class with same name - conflicts ?
 //?or object not able / override replace class ?
 object Empty extends IntSet {

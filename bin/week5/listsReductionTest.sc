@@ -29,6 +29,7 @@ object listsReductionTest {
 
   def product4(xs: List[Int]) = (xs foldLeft 1)(_ * _)
                                                   //> product4: (xs: List[Int])Int
+  /*concatenation or '++' or ':::'*/
   def concat1[T](xs: List[T], ys: List[T]): List[T] =
     (xs foldRight ys)(_ :: _)                     //> concat1: [T](xs: List[T], ys: List[T])List[T]
 
@@ -71,11 +72,24 @@ object listsReductionTest {
     (xs foldLeft ys)((as, bs) => as :: bs)//error: '::' not a member of 'T'*/
 
   /**Reversing list at linear cost, using 'foldLeft':*/
+  /* black magic here:
+  'foldLeft' takes 'List[T]()' as parameter of type 'B'
+  applyed on list & presumebly 'B' is list subtype,
+  but still -
+  how parameter passed without indentifier ?
+  only as type with block placeholder '()'
+  type of 'op' is equal / correspond, match, meet, fit, 'conform'
+  of type List[T] - first function parameter & host / holder of 'foldLeft' method */
+  /* ? 'inheritance' 'binding' ?*/
+  /* ? referenced entity ? */
+  /* ?  type constructors, which take type parameters and yield types ? */
+  /* ? InfixType ? */
+  /* ? Non-Value Types: Method Types ? */
   //def reverse[T](xs: List[T]): List[T] = (xs foldLeft z?)(op?)
   def reverse1[T](xs: List[T]): List[T] = (xs foldLeft List[T]())((xs, x) => x :: xs)
                                                   //> reverse1: [T](xs: List[T])List[T]
   //def reverse2[T](xs: List[T]): List[T] = (xs foldLeft List[T]())(_ :: _)
-  //Note: List[T]() needed / necessary for type inference
+  /*Note: List[T]() needed / necessary for type inference*/
   //? () Unit / Block placeHolder for curring operator function ?
   /* 'Reverse' deduction
     computing output cases:
@@ -93,7 +107,33 @@ object listsReductionTest {
         so, using '::' operator with swapped operands
 		*/
 
-  /** using 'foldRight' implement / define : */
+  def foldRight2[T, U](z: U, xs: List[T])(op: (T, U) => U): U = xs match {
+    case Nil => z
+    case y :: ys => op(y, (foldRight2(z, ys))(op))
+  }                                               //> foldRight2: [T, U](z: U, xs: List[T])(op: (T, U) => U)U
+
+  /*no type inference / deduction for 'op' parameters*/
+  def foldRight3[T, U](z: U, xs: List[T], op: (T, U) => U): U = xs match {
+    case Nil => z
+    case y :: ys => op(y, foldRight3(z, ys, op))
+  }                                               //> foldRight3: [T, U](z: U, xs: List[T], op: (T, U) => U)U
+
+  def foldLeft2[T, U](z: U, xs: List[T])(op: (U, T) => U): U = xs match {
+    case Nil => z
+    //case x :: xs => (xs foldLeft op(z, x))(op)
+    case y :: ys => foldLeft2(op(z, y), ys)(op)
+  }                                               //> foldLeft2: [T, U](z: U, xs: List[T])(op: (U, T) => U)U
+
+  /* from 'foldLeft2': ys is 'U', y is 'T' & 'U' is list from
+  ? 'List[T]()' ? and 'y :: ys'
+  ? is 'List[T]()' bind / passed to 'ys' indentifier as its type ?*/
+  def reverse2[T](xs: List[T]): List[T] = foldLeft2(List[T](), xs)((ys, y) => y :: ys)
+                                                  //> reverse2: [T](xs: List[T])List[T]
+  /*? anonymus indentifiers ?
+  after test: 'List[T]()' - stands for empty list 'List()' for / of type 'T'*/
+  def reverse3[T](xs: List[T]): List[T] = foldLeft2(List[T](), List[T]())((ys, y) => y :: ys)
+                                                  //> reverse3: [T](xs: List[T])List[T]
+  /** using 'foldRight' implement / define: */
   def mapFun[T, U](xs: List[T], f: T => U): List[U] =
     //*(xs foldRight List[U]())(???)
     (xs foldRight List[U]())((y, ys) => f(y) :: ys)
@@ -128,4 +168,14 @@ object listsReductionTest {
   consecList map ((x: String) => x + "1")         //> res16: List[String] = List(a1, a1, a1, a1, b1, c1, c1, c1, d1, a1, a1)
   mapFun(consecList, ((x: String) => x.toUpperCase()))
                                                   //> res17: List[String] = List(A, A, A, A, B, C, C, C, D, A, A)
+  val isNull = null                               //> isNull  : Null = null
+  val symbolLiteral = 'symbolLiteral              //> symbolLiteral  : Symbol = 'symbolLiteral
+  (consecList foldRight 0)((x, z) => z + 1)       //> res18: Int = 11
+  foldRight2(0, consecList)((x, z) => z + 1)      //> res19: Int = 11
+  foldRight3(0, consecList, (x: String, z: Int) => z + 1)
+                                                  //> res20: Int = 11
+  foldLeft2(0, intList)(_ + _)                    //> res21: Int = -3
+  reverse2(intList)                               //> res22: List[Int] = List(-5, 4, -3, 2, -1)
+  reverse2(consecList)                            //> res23: List[String] = List(a, a, d, c, c, c, b, a, a, a, a)
+  reverse3(consecList)                            //> res24: List[String] = List()
 }
