@@ -106,111 +106,21 @@ object listMethodsTest {;import org.scalaide.worksheet.runtime.library.Worksheet
    * by Martin Odersky
    */
   def removeAt2[T](n: Int, xs: List[T]): List[T] = (xs take n) ::: (xs drop (n + 1));System.out.println("""removeAt2: [T](n: Int, xs: List[T])List[T]""");$skip(84); 
-  def removeAt3[T](n: Int, xs: List[T]): List[T] = (xs take n) ++ (xs drop (n + 1));System.out.println("""removeAt3: [T](n: Int, xs: List[T])List[T]""");$skip(3435); 
+  def removeAt3[T](n: Int, xs: List[T]): List[T] = (xs take n) ++ (xs drop (n + 1));System.out.println("""removeAt3: [T](n: Int, xs: List[T])List[T]""");$skip(431); 
 
-  def flatten1(xs: List[Any],
-    remainder: List[Any] = Nil): List[Any] = {
-    //may be must return : List[Any] ?
-    //so list methods may be applyed ?
-    //def matchTest(x: Any): Any = x match {
-    /*
-    pick first element,
-    check if it is list, then
-    extract / remove it from list,
-    pass as new parameter for recursion call,
-    save the rest of list as remainder parameter aka. accumulator
-    each step remainder must decrease by list head
-    until it is not Nil
-    */
-    /*
-    List[Any] = List(List(1, 2), 3, List(4, List(5, 6)))
-    List(List(x, xs = y) = z +: zs, x1, List(x2, List(x3, xs3 = y1) = z2 +: zs2 = y3) = z1 +: zs1)
-      List(1, 2) ++ List(3, List(4, List(5, 6)))
-	      List(1, 2) -- done
-	        List(3, List(4, List(5, 6)))
-	          List(3) ++ List(List(4, List(5, 6)))
-	            List(3) -- done
-	              List(List(4, List(5, 6)))
-	                List(List(4)) ++  List(List(List(5, 6)))
-	                  List(List(4))
-	                    List(4) -- done
-	                      List(List(List(5, 6)))
-	                       List(List(5, 6))
-	                         List(5, 6) -- done
-		List(1, 2) ++ List(3) ++ List(4) ++ List(5, 6)
-			List(1, 2, 3, 4, 5, 6)
-    */
-    def takeHead(zs: List[Any]): Any = {
-      if (zs.isEmpty) {
-        zs //== Nil
-      } else {
-        zs.head
-      }
+  def flatten1(xs: List[Any]): List[Any] = {
+    xs match {
+      //compaund value: List & {Nil | List}
+      case (y :: ys) :: zs => flatten1(y :: ys) ++ flatten1(zs) //*works
+      /*what about tail ?*/
+      case y :: ys => y :: flatten1(ys) //*works
+      //case Nil => xs //*works
+      //simple value
+      case y => xs //or y :: Nil //*works
+      /*exception handler*/
+      //*case _ => Nil
     }
-    def takeTail(zs: List[Any]): Any = {
-      if (zs.isEmpty) {
-        zs //== Nil
-      } else {
-        zs.tail
-      }
-    }
-    def isList(elem: Any): Boolean =
-      elem match {
-        case List(x) => true
-        case x: List[Any] => true
-        case x: Any => false
-        //for exeptions
-        case _ => false
-      } //*works
-
-    def unFoldList(ys: List[Any],
-      remainder: List[Any] = Nil): List[Any] = {
-      Nil
-      /*ys match {
-        /* order of 'case' matters */
-        //zero length / empty list
-        //pattern: (Nil)
-        case Nil => ys
-        case z :: Nil => ys ++ List("val")
-        //last / one element / basic case -
-        //must return primitive value or (not list)
-        //but here List[Any] expected
-        //pattern: (not list) :: (Nil)
-        case z :: zs => List(z) ++ List("list") ++ unFoldList(zs)
-        //something else:
-        case _ => Nil
-        //case List(x: List[Any]) => flatten1(x)//no effect on result
-        /*do until got (not List) then prepend it to the rest*/
-        //while '.head' in xs == (z :: zs) recursivly flatten1 parts of it
-        //& prepend before the rest
-        //pattern: (list) :: (list or Nil)
-      }*/
-    }
-    //flatten1(xs: List[Any])
-    /*for (element <- xs) {
-      element match {*/
-      xs match {
-        //case Nil => print("{Nil}>")
-        //case x +: xs => print("x +: xs>")
-        //case List() => print("{List()}>")
-        //case List(x1) => print("{List(" + x1 + ")}>")
-        //case List(List(x)) => print("{List(List(" + x + "))}>")
-        case Nil => remainder
-        case x2 :: xs2 => flatten1(xs2, x2 :: remainder)
-        case x3 => x3 :: remainder
-        //*case x2: List[Any] => print("{" + flatten1(x2) + ":List[Any]}>")
-        //case x3: Any => List(element)
-        //case x3: Any => List(x3)
-        //case x3: Any => x3 :: Nil
-        //*case x3: Any => print("{" + x3 + ":Any}>")
-        //*case _ => print("{?}>")
-        case _ => Nil
-      }
-      //println("element: " + element)
-    //*}
-    
-    //*unFoldList(Nil) // :: Nil
-  };System.out.println("""flatten1: (xs: List[Any], remainder: List[Any])List[Any]""");$skip(456); 
+  };System.out.println("""flatten1: (xs: List[Any])List[Any]""");$skip(456); //*work as expected
 
   /*for positive order*/
   //power(2 , 0) error: not :Int
@@ -283,20 +193,25 @@ object listMethodsTest {;import org.scalaide.worksheet.runtime.library.Worksheet
   List('a', 'b', 'c', 'd') updated (0, 'A' :: 'a' :: Nil);System.out.println("""res20: List[Any] = """ + $show(res$20));$skip(13); val res$21 = 
   Nil :: Nil;System.out.println("""res21: List[scala.collection.immutable.Nil.type] = """ + $show(res$21));$skip(27); val res$22 = 
   Nil :: List("Not Empty");System.out.println("""res22: List[java.io.Serializable] = """ + $show(res$22));$skip(25); val res$23 = 
-  Nil ++ List("Not Nil");System.out.println("""res23: List[String] = """ + $show(res$23));$skip(25); val res$24 = 
-  
+  Nil ++ List("Not Nil");System.out.println("""res23: List[String] = """ + $show(res$23));$skip(23); val res$24 = 
+
   List(1) :: List(2);System.out.println("""res24: List[Any] = """ + $show(res$24));$skip(22); val res$25 = 
   List(1) ::: List(2);System.out.println("""res25: List[Int] = """ + $show(res$25));$skip(21); val res$26 = 
   List(1) ++ List(2);System.out.println("""res26: List[Int] = """ + $show(res$26));$skip(21); val res$27 = 
   List(1) :+ List(2);System.out.println("""res27: List[Any] = """ + $show(res$27));$skip(21); val res$28 = 
-  List(1) +: List(2);System.out.println("""res28: List[Any] = """ + $show(res$28));$skip(90); 
+  List(1) +: List(2);System.out.println("""res28: List[Any] = """ + $show(res$28));$skip(152); 
 
   val complexList = List(
     List(1, 2),
     3,
+    Nil,
     List(
       4,
-      List(5, 6)));System.out.println("""complexList  : List[Any] = """ + $show(complexList ));$skip(140); ;
+      List(5, 6)),
+    Nil,
+    List(
+      List(7, 8),
+      List(9)));System.out.println("""complexList  : List[Any] = """ + $show(complexList ));$skip(140); ;
   val complexList2 = List(
     List(
       List(
@@ -312,21 +227,61 @@ object listMethodsTest {;import org.scalaide.worksheet.runtime.library.Worksheet
   //or elements are primitive types only -- no 'List' allowed
   flatten1(complexList);System.out.println("""res29: List[Any] = """ + $show(res$29));$skip(25); val res$30 = 
   flatten1(complexList2);System.out.println("""res30: List[Any] = """ + $show(res$30));$skip(16); val res$31 = 
-  flatten1(Nil);System.out.println("""res31: List[Any] = """ + $show(res$31));$skip(35); val res$32 = 
-  List("a", "b", "c").zipWithIndex;System.out.println("""res32: List[(String, Int)] = """ + $show(res$32));$skip(42); val res$33 = 
-  List("a", "b", "c") zip (Stream from 1);System.out.println("""res33: List[(String, Int)] = """ + $show(res$33));$skip(14); val res$34 = 
-  complexList;System.out.println("""res34: List[Any] = """ + $show(res$34));$skip(19); val res$35 = 
-  complexList.head;System.out.println("""res35: Any = """ + $show(res$35));$skip(19); val res$36 = 
-  complexList.tail;System.out.println("""res36: List[Any] = """ + $show(res$36));$skip(28); val res$37 = 
-  complexList.mkString("|");System.out.println("""res37: String = """ + $show(res$37));$skip(25); val res$38 = 
-  complexList.toString();System.out.println("""res38: String = """ + $show(res$38));$skip(17); val res$39 = 
+  flatten1(Nil);System.out.println("""res31: List[Any] = """ + $show(res$31));$skip(777); val res$32 = 
+  // flattens a collection of collection into a single-level collection
+  // err: no implicit view avalible for 'Any'
+  //complexList.flatten
+  // err: 'flatten' is not member of 'Any'
+  //complexList.flatMap(i => i.flatten)
+  complexList.flatMap {
+    //case x :: xs => x.flatten
+    //case List(x) => List(x).flatten
+    //case x: List[Int] => "[List(Int)]"
+    //case !List(x) => "[List]"
+    case (y :: ys) :: xs => "[(y&ys)&xs]" //*works
+    case x :: xs => "[x&xs]" //*works
+    case Nil => "[Nil]" //*works
+    case x => "[x]" //*works
+    case x: Int => "[Int]"
+    case List() => "[Nil]"
+    case List(List(x)) => "[List(List)]"
+    case List(x: Any) => "[List(Any)]"
+    case List(x) => "[List]"
+    case List(x: Int) => "[List(Int)]"
+    case _ => "[undefined]"
+  };System.out.println("""res32: List[Char] = """ + $show(res$32));$skip(144); val res$33 = 
+  complexList takeWhile {
+    //case List(x) => true
+    //case List(x :: xs) => true
+    case x :: xs => true //*works
+    case _ => false
+  };System.out.println("""res33: List[Any] = """ + $show(res$33));$skip(27); val res$34 = 
+  List(List(1, 2)).flatten;System.out.println("""res34: List[Int] = """ + $show(res$34));$skip(245); val res$35 = 
+  /*must be one type for 'flatten'
+  no mixed elements*/
+  //List(List(1, 2), 7).flatten
+  //List(1, 2).flatten
+  complexList filter {
+    //*case x: Int => true
+    case x :: xs => true //*works
+    case List(x) => true
+    case _ => false
+  };System.out.println("""res35: List[Any] = """ + $show(res$35));$skip(37); val res$36 = 
 
-  complexList2;System.out.println("""res39: List[Any] = """ + $show(res$39));$skip(128); 
+  List("a", "b", "c").zipWithIndex;System.out.println("""res36: List[(String, Int)] = """ + $show(res$36));$skip(42); val res$37 = 
+  List("a", "b", "c") zip (Stream from 1);System.out.println("""res37: List[(String, Int)] = """ + $show(res$37));$skip(14); val res$38 = 
+  complexList;System.out.println("""res38: List[Any] = """ + $show(res$38));$skip(19); val res$39 = 
+  complexList.head;System.out.println("""res39: Any = """ + $show(res$39));$skip(19); val res$40 = 
+  complexList.tail;System.out.println("""res40: List[Any] = """ + $show(res$40));$skip(28); val res$41 = 
+  complexList.mkString("|");System.out.println("""res41: String = """ + $show(res$41));$skip(25); val res$42 = 
+  complexList.toString();System.out.println("""res42: String = """ + $show(res$42));$skip(17); val res$43 = 
+
+  complexList2;System.out.println("""res43: List[Any] = """ + $show(res$43));$skip(128); 
 
   //val patternSample = "z"
   //*val patternSample = List()
   //*val patternSample = List(1)
-  val patternSample = List(1, 2);System.out.println("""patternSample  : List[Int] = """ + $show(patternSample ));$skip(408); val res$40 = 
+  val patternSample = List(1, 2);System.out.println("""patternSample  : List[Int] = """ + $show(patternSample ));$skip(408); val res$44 = 
   //*val patternSample = List(List(1), 2)
   //*val patternSample = List(List(1))
   patternSample match {
@@ -338,16 +293,16 @@ object listMethodsTest {;import org.scalaide.worksheet.runtime.library.Worksheet
     case List(x) => "List(x)" //* for List(List(1))
     case x: Any => "x: Any" //* for List(List(1))
     case _ => "undefined"
-  };System.out.println("""res40: String = """ + $show(res$40));$skip(97); val res$41 = 
+  };System.out.println("""res44: String = """ + $show(res$44));$skip(97); val res$45 = 
   //power(2, 3) //2 * 2 * 2 * 2 = 16
   //power2(2, 0) //2 * 2 * 2 * 2 = 16
-  1.isInstanceOf[Int];System.out.println("""res41: Boolean = """ + $show(res$41));$skip(28); val res$42 = 
-  List(1).isInstanceOf[Int];System.out.println("""res42: Boolean = """ + $show(res$42));$skip(32); val res$43 = 
-  List(1).isInstanceOf[List[_]];System.out.println("""res43: Boolean = """ + $show(res$43));$skip(38); val res$44 = 
-  List(List(1)).isInstanceOf[List[_]];System.out.println("""res44: Boolean = """ + $show(res$44));$skip(44); val res$45 = 
-  List(List(1)).isInstanceOf[List[List[_]]];System.out.println("""res45: Boolean = """ + $show(res$45));$skip(104); val res$46 = 
+  1.isInstanceOf[Int];System.out.println("""res45: Boolean = """ + $show(res$45));$skip(28); val res$46 = 
+  List(1).isInstanceOf[Int];System.out.println("""res46: Boolean = """ + $show(res$46));$skip(32); val res$47 = 
+  List(1).isInstanceOf[List[_]];System.out.println("""res47: Boolean = """ + $show(res$47));$skip(38); val res$48 = 
+  List(List(1)).isInstanceOf[List[_]];System.out.println("""res48: Boolean = """ + $show(res$48));$skip(44); val res$49 = 
+  List(List(1)).isInstanceOf[List[List[_]]];System.out.println("""res49: Boolean = """ + $show(res$49));$skip(104); val res$50 = 
   //List(1).isInstanceOf[List[List[Any]]]
   //1.isInstanceOf[List[_]]
-  List(1).isInstanceOf[List[Any]];System.out.println("""res46: Boolean = """ + $show(res$46))}
+  List(1).isInstanceOf[List[Any]];System.out.println("""res50: Boolean = """ + $show(res$50))}
   //1.isInstanceOf[List[Any]]
 }

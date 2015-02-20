@@ -110,109 +110,19 @@ object listMethodsTest {
   def removeAt3[T](n: Int, xs: List[T]): List[T] = (xs take n) ++ (xs drop (n + 1))
                                                   //> removeAt3: [T](n: Int, xs: List[T])List[T]
 
-  def flatten1(xs: List[Any],
-    remainder: List[Any] = Nil): List[Any] = {
-    //may be must return : List[Any] ?
-    //so list methods may be applyed ?
-    //def matchTest(x: Any): Any = x match {
-    /*
-    pick first element,
-    check if it is list, then
-    extract / remove it from list,
-    pass as new parameter for recursion call,
-    save the rest of list as remainder parameter aka. accumulator
-    each step remainder must decrease by list head
-    until it is not Nil
-    */
-    /*
-    List[Any] = List(List(1, 2), 3, List(4, List(5, 6)))
-    List(List(x, xs = y) = z +: zs, x1, List(x2, List(x3, xs3 = y1) = z2 +: zs2 = y3) = z1 +: zs1)
-      List(1, 2) ++ List(3, List(4, List(5, 6)))
-	      List(1, 2) -- done
-	        List(3, List(4, List(5, 6)))
-	          List(3) ++ List(List(4, List(5, 6)))
-	            List(3) -- done
-	              List(List(4, List(5, 6)))
-	                List(List(4)) ++  List(List(List(5, 6)))
-	                  List(List(4))
-	                    List(4) -- done
-	                      List(List(List(5, 6)))
-	                       List(List(5, 6))
-	                         List(5, 6) -- done
-		List(1, 2) ++ List(3) ++ List(4) ++ List(5, 6)
-			List(1, 2, 3, 4, 5, 6)
-    */
-    def takeHead(zs: List[Any]): Any = {
-      if (zs.isEmpty) {
-        zs //== Nil
-      } else {
-        zs.head
-      }
+  def flatten1(xs: List[Any]): List[Any] = {
+    xs match {
+      //compaund value: List & {Nil | List}
+      case (y :: ys) :: zs => flatten1(y :: ys) ++ flatten1(zs) //*works
+      /*what about tail ?*/
+      case y :: ys => y :: flatten1(ys) //*works
+      //case Nil => xs //*works
+      //simple value
+      case y => xs //or y :: Nil //*works
+      /*exception handler*/
+      //*case _ => Nil
     }
-    def takeTail(zs: List[Any]): Any = {
-      if (zs.isEmpty) {
-        zs //== Nil
-      } else {
-        zs.tail
-      }
-    }
-    def isList(elem: Any): Boolean =
-      elem match {
-        case List(x) => true
-        case x: List[Any] => true
-        case x: Any => false
-        //for exeptions
-        case _ => false
-      } //*works
-
-    def unFoldList(ys: List[Any],
-      remainder: List[Any] = Nil): List[Any] = {
-      Nil
-      /*ys match {
-        /* order of 'case' matters */
-        //zero length / empty list
-        //pattern: (Nil)
-        case Nil => ys
-        case z :: Nil => ys ++ List("val")
-        //last / one element / basic case -
-        //must return primitive value or (not list)
-        //but here List[Any] expected
-        //pattern: (not list) :: (Nil)
-        case z :: zs => List(z) ++ List("list") ++ unFoldList(zs)
-        //something else:
-        case _ => Nil
-        //case List(x: List[Any]) => flatten1(x)//no effect on result
-        /*do until got (not List) then prepend it to the rest*/
-        //while '.head' in xs == (z :: zs) recursivly flatten1 parts of it
-        //& prepend before the rest
-        //pattern: (list) :: (list or Nil)
-      }*/
-    }
-    //flatten1(xs: List[Any])
-    /*for (element <- xs) {
-      element match {*/
-      xs match {
-        //case Nil => print("{Nil}>")
-        //case x +: xs => print("x +: xs>")
-        //case List() => print("{List()}>")
-        //case List(x1) => print("{List(" + x1 + ")}>")
-        //case List(List(x)) => print("{List(List(" + x + "))}>")
-        case Nil => remainder
-        case x2 :: xs2 => flatten1(xs2, x2 :: remainder)
-        case x3 => x3 :: remainder
-        //*case x2: List[Any] => print("{" + flatten1(x2) + ":List[Any]}>")
-        //case x3: Any => List(element)
-        //case x3: Any => List(x3)
-        //case x3: Any => x3 :: Nil
-        //*case x3: Any => print("{" + x3 + ":Any}>")
-        //*case _ => print("{?}>")
-        case _ => Nil
-      }
-      //println("element: " + element)
-    //*}
-    
-    //*unFoldList(Nil) // :: Nil
-  }                                               //> flatten1: (xs: List[Any], remainder: List[Any])List[Any]
+  }//*work as expected                            //> flatten1: (xs: List[Any])List[Any]
 
   /*for positive order*/
   //power(2 , 0) error: not :Int
@@ -287,7 +197,7 @@ object listMethodsTest {
   Nil :: Nil                                      //> res21: List[scala.collection.immutable.Nil.type] = List(List())
   Nil :: List("Not Empty")                        //> res22: List[java.io.Serializable] = List(List(), Not Empty)
   Nil ++ List("Not Nil")                          //> res23: List[String] = List(Not Nil)
-  
+
   List(1) :: List(2)                              //> res24: List[Any] = List(List(1), 2)
   List(1) ::: List(2)                             //> res25: List[Int] = List(1, 2)
   List(1) ++ List(2)                              //> res26: List[Int] = List(1, 2)
@@ -297,9 +207,15 @@ object listMethodsTest {
   val complexList = List(
     List(1, 2),
     3,
+    Nil,
     List(
       4,
-      List(5, 6)));                               //> complexList  : List[Any] = List(List(1, 2), 3, List(4, List(5, 6)))
+      List(5, 6)),
+    Nil,
+    List(
+      List(7, 8),
+      List(9)));                                  //> complexList  : List[Any] = List(List(1, 2), 3, List(), List(4, List(5, 6)),
+                                                  //|  List(), List(List(7, 8), List(9)))
   val complexList2 = List(
     List(
       List(
@@ -314,19 +230,64 @@ object listMethodsTest {
   //flatten(List(List(1, 1), 2, List(3, List(5, 8)))) =>
   //List[Any] = List(1, 1, 2, 3, 5, 8) -- '.heads' only ? - no complex objects included
   //or elements are primitive types only -- no 'List' allowed
-  flatten1(complexList)                           //> res29: List[Any] = List(List(4, List(5, 6)), 3, List(1, 2))
-  flatten1(complexList2)                          //> res30: List[Any] = List(-7, List(List(List(-1, -2), -3), List(-4, List(-5, 
-                                                  //| -6))))
+  flatten1(complexList)                           //> res29: List[Any] = List(1, 2, 3, List(), 4, 5, 6, List(), 7, 8, 9)
+  flatten1(complexList2)                          //> res30: List[Any] = List(-1, -2, -3, -4, -5, -6, -7)
   flatten1(Nil)                                   //> res31: List[Any] = List()
-  List("a", "b", "c").zipWithIndex                //> res32: List[(String, Int)] = List((a,0), (b,1), (c,2))
-  List("a", "b", "c") zip (Stream from 1)         //> res33: List[(String, Int)] = List((a,1), (b,2), (c,3))
-  complexList                                     //> res34: List[Any] = List(List(1, 2), 3, List(4, List(5, 6)))
-  complexList.head                                //> res35: Any = List(1, 2)
-  complexList.tail                                //> res36: List[Any] = List(3, List(4, List(5, 6)))
-  complexList.mkString("|")                       //> res37: String = List(1, 2)|3|List(4, List(5, 6))
-  complexList.toString()                          //> res38: String = List(List(1, 2), 3, List(4, List(5, 6)))
+  // flattens a collection of collection into a single-level collection
+  // err: no implicit view avalible for 'Any'
+  //complexList.flatten
+  // err: 'flatten' is not member of 'Any'
+  //complexList.flatMap(i => i.flatten)
+  complexList.flatMap {
+    //case x :: xs => x.flatten
+    //case List(x) => List(x).flatten
+    //case x: List[Int] => "[List(Int)]"
+    //case !List(x) => "[List]"
+    case (y :: ys) :: xs => "[(y&ys)&xs]" //*works
+    case x :: xs => "[x&xs]" //*works
+    case Nil => "[Nil]" //*works
+    case x => "[x]" //*works
+    case x: Int => "[Int]"
+    case List() => "[Nil]"
+    case List(List(x)) => "[List(List)]"
+    case List(x: Any) => "[List(Any)]"
+    case List(x) => "[List]"
+    case List(x: Int) => "[List(Int)]"
+    case _ => "[undefined]"
+  }                                               //> res32: List[Char] = List([, x, &, x, s, ], [, x, ], [, N, i, l, ], [, x, &,
+                                                  //|  x, s, ], [, N, i, l, ], [, (, y, &, y, s, ), &, x, s, ])
+  complexList takeWhile {
+    //case List(x) => true
+    //case List(x :: xs) => true
+    case x :: xs => true //*works
+    case _ => false
+  }                                               //> res33: List[Any] = List(List(1, 2))
+  List(List(1, 2)).flatten                        //> res34: List[Int] = List(1, 2)
+  /*must be one type for 'flatten'
+  no mixed elements*/
+  //List(List(1, 2), 7).flatten
+  //List(1, 2).flatten
+  complexList filter {
+    //*case x: Int => true
+    case x :: xs => true //*works
+    case List(x) => true
+    case _ => false
+  }                                               //> res35: List[Any] = List(List(1, 2), List(4, List(5, 6)), List(List(7, 8), L
+                                                  //| ist(9)))
 
-  complexList2                                    //> res39: List[Any] = List(List(List(List(-1, -2), -3), List(-4, List(-5, -6))
+  List("a", "b", "c").zipWithIndex                //> res36: List[(String, Int)] = List((a,0), (b,1), (c,2))
+  List("a", "b", "c") zip (Stream from 1)         //> res37: List[(String, Int)] = List((a,1), (b,2), (c,3))
+  complexList                                     //> res38: List[Any] = List(List(1, 2), 3, List(), List(4, List(5, 6)), List(),
+                                                  //|  List(List(7, 8), List(9)))
+  complexList.head                                //> res39: Any = List(1, 2)
+  complexList.tail                                //> res40: List[Any] = List(3, List(), List(4, List(5, 6)), List(), List(List(7
+                                                  //| , 8), List(9)))
+  complexList.mkString("|")                       //> res41: String = List(1, 2)|3|List()|List(4, List(5, 6))|List()|List(List(7,
+                                                  //|  8), List(9))
+  complexList.toString()                          //> res42: String = List(List(1, 2), 3, List(), List(4, List(5, 6)), List(), Li
+                                                  //| st(List(7, 8), List(9)))
+
+  complexList2                                    //> res43: List[Any] = List(List(List(List(-1, -2), -3), List(-4, List(-5, -6))
                                                   //| ), -7)
 
   //val patternSample = "z"
@@ -344,16 +305,16 @@ object listMethodsTest {
     case List(x) => "List(x)" //* for List(List(1))
     case x: Any => "x: Any" //* for List(List(1))
     case _ => "undefined"
-  }                                               //> res40: String = x
+  }                                               //> res44: String = x
   //power(2, 3) //2 * 2 * 2 * 2 = 16
   //power2(2, 0) //2 * 2 * 2 * 2 = 16
-  1.isInstanceOf[Int]                             //> res41: Boolean = true
-  List(1).isInstanceOf[Int]                       //> res42: Boolean = false
-  List(1).isInstanceOf[List[_]]                   //> res43: Boolean = true
-  List(List(1)).isInstanceOf[List[_]]             //> res44: Boolean = true
-  List(List(1)).isInstanceOf[List[List[_]]]       //> res45: Boolean = true
+  1.isInstanceOf[Int]                             //> res45: Boolean = true
+  List(1).isInstanceOf[Int]                       //> res46: Boolean = false
+  List(1).isInstanceOf[List[_]]                   //> res47: Boolean = true
+  List(List(1)).isInstanceOf[List[_]]             //> res48: Boolean = true
+  List(List(1)).isInstanceOf[List[List[_]]]       //> res49: Boolean = true
   //List(1).isInstanceOf[List[List[Any]]]
   //1.isInstanceOf[List[_]]
-  List(1).isInstanceOf[List[Any]]                 //> res46: Boolean = true
+  List(1).isInstanceOf[List[Any]]                 //> res50: Boolean = true
   //1.isInstanceOf[List[Any]]
 }
