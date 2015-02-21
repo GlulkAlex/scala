@@ -57,11 +57,13 @@ object sequenceOperationsTest {;import org.scalaide.worksheet.runtime.library.Wo
   def scalarProduct2(xs: Vector[Double], ys: Vector[Double]): Double =
     (xs zip ys).map { case (x, y) => x * y }.sum;System.out.println("""scalarProduct2: (xs: Vector[Double], ys: Vector[Double])Double""");$skip(50); 
 
-  val vector2 = Vector(1.2, 2.3, 3.4, 4.5, 5.6);System.out.println("""vector2  : scala.collection.immutable.Vector[Double] = """ + $show(vector2 ));$skip(43); 
-  val vector3 = Vector(6.7, 7.8, 8.9, 9.1);System.out.println("""vector3  : scala.collection.immutable.Vector[Double] = """ + $show(vector3 ));$skip(35); val res$21 = 
-  scalarProduct1(vector2, vector3);System.out.println("""res21: Double = """ + $show(res$21));$skip(35); val res$22 = 
-  scalarProduct2(vector2, vector3);System.out.println("""res22: Double = """ + $show(res$22));$skip(48); val res$23 = 
-  1.2 * 6.7 + 2.3 * 7.8 + 3.4 * 8.9 + 4.5 * 9.1;System.out.println("""res23: Double = """ + $show(res$23));$skip(325); 
+  val vector2 = Vector(1.2, 2.3, 3.4, 4.5, 5.6);System.out.println("""vector2  : scala.collection.immutable.Vector[Double] = """ + $show(vector2 ));$skip(48); 
+  val vector3 = Vector(6.7, 7.8, 8.9, 9.1, 0.1);System.out.println("""vector3  : scala.collection.immutable.Vector[Double] = """ + $show(vector3 ));$skip(22); val res$21 = 
+  vector2 zip vector3;System.out.println("""res21: scala.collection.immutable.Vector[(Double, Double)] = """ + $show(res$21));$skip(35); val res$22 = 
+  scalarProduct1(vector2, vector3);System.out.println("""res22: Double = """ + $show(res$22));$skip(35); val res$23 = 
+  scalarProduct2(vector2, vector3);System.out.println("""res23: Double = """ + $show(res$23));$skip(62); val res$24 = 
+  1.2 * 6.7 + 2.3 * 7.8 +
+  3.4 * 8.9 + 4.5 * 9.1 + 5.6 * 0.1;System.out.println("""res24: Double = """ + $show(res$24));$skip(325); 
 
   /*Excersise:
  A number 'n' is prime if
@@ -80,33 +82,33 @@ object sequenceOperationsTest {;import org.scalaide.worksheet.runtime.library.Wo
    * Functions and Methods Implementation
    * by Martin Odersky
    */
-  def isPrime2(n: Int) = (2 until n) forall (d => n % d != 0);System.out.println("""isPrime2: (n: Int)Boolean""");$skip(15); val res$24 = 
+  def isPrime2(n: Int) = (2 until n) forall (d => n % d != 0);System.out.println("""isPrime2: (n: Int)Boolean""");$skip(15); val res$25 = 
   
-  delim(9);System.out.println("""res24: scala.collection.immutable.IndexedSeq[Int] = """ + $show(res$24));$skip(12); val res$25 = 
-  delim(11);System.out.println("""res25: scala.collection.immutable.IndexedSeq[Int] = """ + $show(res$25));$skip(11); val res$26 = 
-  delim(2);System.out.println("""res26: scala.collection.immutable.IndexedSeq[Int] = """ + $show(res$26));$skip(11); val res$27 = 
-  delim(1);System.out.println("""res27: scala.collection.immutable.IndexedSeq[Int] = """ + $show(res$27));$skip(11); val res$28 = 
-  delim(0);System.out.println("""res28: scala.collection.immutable.IndexedSeq[Int] = """ + $show(res$28));$skip(13); val res$29 = 
-  isPrime(0);System.out.println("""res29: Boolean = """ + $show(res$29));$skip(13); val res$30 = 
-  isPrime(1);System.out.println("""res30: Boolean = """ + $show(res$30));$skip(13); val res$31 = 
-  isPrime(2);System.out.println("""res31: Boolean = """ + $show(res$31));$skip(13); val res$32 = 
-  isPrime(3);System.out.println("""res32: Boolean = """ + $show(res$32));$skip(13); val res$33 = 
-  isPrime(4);System.out.println("""res33: Boolean = """ + $show(res$33));$skip(13); val res$34 = 
-  isPrime(5);System.out.println("""res34: Boolean = """ + $show(res$34));$skip(13); val res$35 = 
-  isPrime(6);System.out.println("""res35: Boolean = """ + $show(res$35));$skip(13); val res$36 = 
-  isPrime(7);System.out.println("""res36: Boolean = """ + $show(res$36));$skip(13); val res$37 = 
-  isPrime(8);System.out.println("""res37: Boolean = """ + $show(res$37));$skip(13); val res$38 = 
-  isPrime(9);System.out.println("""res38: Boolean = """ + $show(res$38));$skip(14); val res$39 = 
-  isPrime(10);System.out.println("""res39: Boolean = """ + $show(res$39));$skip(14); val res$40 = 
-  isPrime(11);System.out.println("""res40: Boolean = """ + $show(res$40));$skip(14); val res$41 = 
-  isPrime(12);System.out.println("""res41: Boolean = """ + $show(res$41));$skip(14); val res$42 = 
-  isPrime(13);System.out.println("""res42: Boolean = """ + $show(res$42));$skip(14); val res$43 = 
-  isPrime(14);System.out.println("""res43: Boolean = """ + $show(res$43));$skip(14); val res$44 = 
-  isPrime(15);System.out.println("""res44: Boolean = """ + $show(res$44));$skip(14); val res$45 = 
-  isPrime(16);System.out.println("""res45: Boolean = """ + $show(res$45));$skip(14); val res$46 = 
-  isPrime(17);System.out.println("""res46: Boolean = """ + $show(res$46));$skip(14); val res$47 = 
-  isPrime(18);System.out.println("""res47: Boolean = """ + $show(res$47));$skip(14); val res$48 = 
-  isPrime(19);System.out.println("""res48: Boolean = """ + $show(res$48));$skip(15); val res$49 = 
-  isPrime2(19);System.out.println("""res49: Boolean = """ + $show(res$49));$skip(15); val res$50 = 
-  isPrime2(20);System.out.println("""res50: Boolean = """ + $show(res$50))}
+  delim(9);System.out.println("""res25: scala.collection.immutable.IndexedSeq[Int] = """ + $show(res$25));$skip(12); val res$26 = 
+  delim(11);System.out.println("""res26: scala.collection.immutable.IndexedSeq[Int] = """ + $show(res$26));$skip(11); val res$27 = 
+  delim(2);System.out.println("""res27: scala.collection.immutable.IndexedSeq[Int] = """ + $show(res$27));$skip(11); val res$28 = 
+  delim(1);System.out.println("""res28: scala.collection.immutable.IndexedSeq[Int] = """ + $show(res$28));$skip(11); val res$29 = 
+  delim(0);System.out.println("""res29: scala.collection.immutable.IndexedSeq[Int] = """ + $show(res$29));$skip(13); val res$30 = 
+  isPrime(0);System.out.println("""res30: Boolean = """ + $show(res$30));$skip(13); val res$31 = 
+  isPrime(1);System.out.println("""res31: Boolean = """ + $show(res$31));$skip(13); val res$32 = 
+  isPrime(2);System.out.println("""res32: Boolean = """ + $show(res$32));$skip(13); val res$33 = 
+  isPrime(3);System.out.println("""res33: Boolean = """ + $show(res$33));$skip(13); val res$34 = 
+  isPrime(4);System.out.println("""res34: Boolean = """ + $show(res$34));$skip(13); val res$35 = 
+  isPrime(5);System.out.println("""res35: Boolean = """ + $show(res$35));$skip(13); val res$36 = 
+  isPrime(6);System.out.println("""res36: Boolean = """ + $show(res$36));$skip(13); val res$37 = 
+  isPrime(7);System.out.println("""res37: Boolean = """ + $show(res$37));$skip(13); val res$38 = 
+  isPrime(8);System.out.println("""res38: Boolean = """ + $show(res$38));$skip(13); val res$39 = 
+  isPrime(9);System.out.println("""res39: Boolean = """ + $show(res$39));$skip(14); val res$40 = 
+  isPrime(10);System.out.println("""res40: Boolean = """ + $show(res$40));$skip(14); val res$41 = 
+  isPrime(11);System.out.println("""res41: Boolean = """ + $show(res$41));$skip(14); val res$42 = 
+  isPrime(12);System.out.println("""res42: Boolean = """ + $show(res$42));$skip(14); val res$43 = 
+  isPrime(13);System.out.println("""res43: Boolean = """ + $show(res$43));$skip(14); val res$44 = 
+  isPrime(14);System.out.println("""res44: Boolean = """ + $show(res$44));$skip(14); val res$45 = 
+  isPrime(15);System.out.println("""res45: Boolean = """ + $show(res$45));$skip(14); val res$46 = 
+  isPrime(16);System.out.println("""res46: Boolean = """ + $show(res$46));$skip(14); val res$47 = 
+  isPrime(17);System.out.println("""res47: Boolean = """ + $show(res$47));$skip(14); val res$48 = 
+  isPrime(18);System.out.println("""res48: Boolean = """ + $show(res$48));$skip(14); val res$49 = 
+  isPrime(19);System.out.println("""res49: Boolean = """ + $show(res$49));$skip(15); val res$50 = 
+  isPrime2(19);System.out.println("""res50: Boolean = """ + $show(res$50));$skip(15); val res$51 = 
+  isPrime2(20);System.out.println("""res51: Boolean = """ + $show(res$51))}
 }

@@ -64,11 +64,14 @@ object sequenceOperationsTest {
 
   val vector2 = Vector(1.2, 2.3, 3.4, 4.5, 5.6)   //> vector2  : scala.collection.immutable.Vector[Double] = Vector(1.2, 2.3, 3.4
                                                   //| , 4.5, 5.6)
-  val vector3 = Vector(6.7, 7.8, 8.9, 9.1)        //> vector3  : scala.collection.immutable.Vector[Double] = Vector(6.7, 7.8, 8.9
-                                                  //| , 9.1)
-  scalarProduct1(vector2, vector3)                //> res21: Double = 97.19
-  scalarProduct2(vector2, vector3)                //> res22: Double = 97.19
-  1.2 * 6.7 + 2.3 * 7.8 + 3.4 * 8.9 + 4.5 * 9.1   //> res23: Double = 97.19
+  val vector3 = Vector(6.7, 7.8, 8.9, 9.1, 0.1)   //> vector3  : scala.collection.immutable.Vector[Double] = Vector(6.7, 7.8, 8.9
+                                                  //| , 9.1, 0.1)
+  vector2 zip vector3                             //> res21: scala.collection.immutable.Vector[(Double, Double)] = Vector((1.2,6.
+                                                  //| 7), (2.3,7.8), (3.4,8.9), (4.5,9.1), (5.6,0.1))
+  scalarProduct1(vector2, vector3)                //> res22: Double = 97.75
+  scalarProduct2(vector2, vector3)                //> res23: Double = 97.75
+  1.2 * 6.7 + 2.3 * 7.8 +
+  3.4 * 8.9 + 4.5 * 9.1 + 5.6 * 0.1               //> res24: Double = 97.75
 
   /*Excersise:
  A number 'n' is prime if
@@ -91,33 +94,33 @@ object sequenceOperationsTest {
   def isPrime2(n: Int) = (2 until n) forall (d => n % d != 0)
                                                   //> isPrime2: (n: Int)Boolean
   
-  delim(9)                                        //> res24: scala.collection.immutable.IndexedSeq[Int] = Vector(1, 0, 1, 4, 3, 2
+  delim(9)                                        //> res25: scala.collection.immutable.IndexedSeq[Int] = Vector(1, 0, 1, 4, 3, 2
                                                   //| , 1)
-  delim(11)                                       //> res25: scala.collection.immutable.IndexedSeq[Int] = Vector(1, 2, 3, 1, 5, 4
+  delim(11)                                       //> res26: scala.collection.immutable.IndexedSeq[Int] = Vector(1, 2, 3, 1, 5, 4
                                                   //| , 3, 2, 1)
-  delim(2)                                        //> res26: scala.collection.immutable.IndexedSeq[Int] = Vector()
-  delim(1)                                        //> res27: scala.collection.immutable.IndexedSeq[Int] = Vector()
-  delim(0)                                        //> res28: scala.collection.immutable.IndexedSeq[Int] = Vector()
-  isPrime(0)                                      //> res29: Boolean = true
-  isPrime(1)                                      //> res30: Boolean = true
-  isPrime(2)                                      //> res31: Boolean = true
-  isPrime(3)                                      //> res32: Boolean = true
-  isPrime(4)                                      //> res33: Boolean = false
-  isPrime(5)                                      //> res34: Boolean = true
-  isPrime(6)                                      //> res35: Boolean = false
-  isPrime(7)                                      //> res36: Boolean = true
-  isPrime(8)                                      //> res37: Boolean = false
-  isPrime(9)                                      //> res38: Boolean = false
-  isPrime(10)                                     //> res39: Boolean = false
-  isPrime(11)                                     //> res40: Boolean = true
-  isPrime(12)                                     //> res41: Boolean = false
-  isPrime(13)                                     //> res42: Boolean = true
-  isPrime(14)                                     //> res43: Boolean = false
-  isPrime(15)                                     //> res44: Boolean = false
-  isPrime(16)                                     //> res45: Boolean = false
-  isPrime(17)                                     //> res46: Boolean = true
-  isPrime(18)                                     //> res47: Boolean = false
-  isPrime(19)                                     //> res48: Boolean = true
-  isPrime2(19)                                    //> res49: Boolean = true
-  isPrime2(20)                                    //> res50: Boolean = false
+  delim(2)                                        //> res27: scala.collection.immutable.IndexedSeq[Int] = Vector()
+  delim(1)                                        //> res28: scala.collection.immutable.IndexedSeq[Int] = Vector()
+  delim(0)                                        //> res29: scala.collection.immutable.IndexedSeq[Int] = Vector()
+  isPrime(0)                                      //> res30: Boolean = true
+  isPrime(1)                                      //> res31: Boolean = true
+  isPrime(2)                                      //> res32: Boolean = true
+  isPrime(3)                                      //> res33: Boolean = true
+  isPrime(4)                                      //> res34: Boolean = false
+  isPrime(5)                                      //> res35: Boolean = true
+  isPrime(6)                                      //> res36: Boolean = false
+  isPrime(7)                                      //> res37: Boolean = true
+  isPrime(8)                                      //> res38: Boolean = false
+  isPrime(9)                                      //> res39: Boolean = false
+  isPrime(10)                                     //> res40: Boolean = false
+  isPrime(11)                                     //> res41: Boolean = true
+  isPrime(12)                                     //> res42: Boolean = false
+  isPrime(13)                                     //> res43: Boolean = true
+  isPrime(14)                                     //> res44: Boolean = false
+  isPrime(15)                                     //> res45: Boolean = false
+  isPrime(16)                                     //> res46: Boolean = false
+  isPrime(17)                                     //> res47: Boolean = true
+  isPrime(18)                                     //> res48: Boolean = false
+  isPrime(19)                                     //> res49: Boolean = true
+  isPrime2(19)                                    //> res50: Boolean = true
+  isPrime2(20)                                    //> res51: Boolean = false
 }

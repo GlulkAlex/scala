@@ -227,12 +227,14 @@ object listMethodsTest {;import org.scalaide.worksheet.runtime.library.Worksheet
   //or elements are primitive types only -- no 'List' allowed
   flatten1(complexList);System.out.println("""res29: List[Any] = """ + $show(res$29));$skip(25); val res$30 = 
   flatten1(complexList2);System.out.println("""res30: List[Any] = """ + $show(res$30));$skip(16); val res$31 = 
-  flatten1(Nil);System.out.println("""res31: List[Any] = """ + $show(res$31));$skip(777); val res$32 = 
+  flatten1(Nil);System.out.println("""res31: List[Any] = """ + $show(res$31));$skip(865); val res$32 = 
   // flattens a collection of collection into a single-level collection
   // err: no implicit view avalible for 'Any'
   //complexList.flatten
   // err: 'flatten' is not member of 'Any'
   //complexList.flatMap(i => i.flatten)
+  /*xs flatMap f = (xs map f).flatten*/
+  //complexList flatMap ((i1: List[Any]) => i1)
   complexList.flatMap {
     //case x :: xs => x.flatten
     //case List(x) => List(x).flatten

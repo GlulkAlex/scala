@@ -238,6 +238,8 @@ object listMethodsTest {
   //complexList.flatten
   // err: 'flatten' is not member of 'Any'
   //complexList.flatMap(i => i.flatten)
+  /*xs flatMap f = (xs map f).flatten*/
+  //complexList flatMap ((i1: List[Any]) => i1)
   complexList.flatMap {
     //case x :: xs => x.flatten
     //case List(x) => List(x).flatten
