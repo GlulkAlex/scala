@@ -1,12 +1,12 @@
 package week1
 
 object session {
-  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+  //*println("Welcome to the Scala worksheet")
   1 + 2                                           //> res0: Int(3) = 3
-  def abs(x: Double) = if (x >= 0)
+  def abs1(x: Double) = if (x >= 0)
     x
   else
-    -x                                            //> abs: (x: Double)Double
+    -x                                            //> abs1: (x: Double)Double
 
   val x = 0                                       //> x  : Int = 0
   def f(y: Int) = y + 1                           //> f: (y: Int)Int
@@ -44,7 +44,7 @@ object session {
     //def isGoodEnough(guess: Double, x: Double) =
     def isGoodEnough(guess: Double) =
       //abs(guess * guess - x) < 0.001 //epsilon value
-      abs(guess * guess - x) < x * 0.001 //epsilon value
+      abs1(guess * guess - x) < x * 0.001 //epsilon value
     //or:
     //abs(guess * guess - x) / x < 0.001
     //Design a different version of 'isGoodEnough'
@@ -71,8 +71,8 @@ object session {
    * the function
    * that computes
    * the greatest common divisor of two numbers.
-   * Here’s an implementation of 'gcd' using
-   * Euclid’s algorithm.
+   * Here's an implementation of 'gcd' using
+   * Euclid's algorithm.
    */
   def gcd(a: Int, b: Int): Int =
     if (b == 0)
@@ -82,6 +82,8 @@ object session {
 
   gcd(14, 21)                                     //> res4: Int = 7
   14 % 21                                         //> res5: Int(14) = 14
+  (7 * 2) % (7 * 3)                               //> res6: Int = 14
+  21 % 14                                         //> res7: Int(7) = 7
 
   /*Note:
   explisit type of recursive function needed
@@ -89,22 +91,22 @@ object session {
   error trowing on compiling*/
   //Note: recursion depth and stack overflow
   /** non Tail recursive Implementation */
-  /*def factorial(n: Int): Int =
+  def factorial0(n: Int): Int =
     if (n == 0)
       1
     else
-      n * factorial(n - 1)*/
+      n * factorial0(n - 1)                       //> factorial0: (n: Int)Int
 
   /** my Tail recursive Implementation */
-  /*def factorial(n: Int): Int = {
+  def factorial1(n: Int): Int = {
     def nFactorial(x: Int) =
-      x * factorial(x - 1)
+      x * factorial1(x - 1)
 
     if (n == 0)
       1
     else
       nFactorial(n)
-  }*/ //works as expected
+  } //works as expected                           //> factorial1: (n: Int)Int
 
   /**
    * Tail recursive Implementation
@@ -119,11 +121,13 @@ object session {
 
     loop(1, n)
   }                                               //> factorial: (n: Int)Int
-  
-  factorial(1)                                    //> res6: Int = 1
-  factorial(2)                                    //> res7: Int = 2
-  factorial(3)                                    //> res8: Int = 6
-  factorial(4)                                    //> res9: Int = 24
-  factorial(5)                                    //> res10: Int = 120
+
+  factorial(1)                                    //> res8: Int = 1
+  factorial(2)                                    //> res9: Int = 2
+  factorial(3)                                    //> res10: Int = 6
+  factorial(4)                                    //> res11: Int = 24
+  factorial0(5)                                   //> res12: Int = 120
+  factorial(5)                                    //> res13: Int = 120
+  factorial1(5)                                   //> res14: Int = 120
 
 }

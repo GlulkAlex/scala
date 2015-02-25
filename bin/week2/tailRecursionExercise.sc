@@ -4,12 +4,12 @@ object exercise {
   //Note:
   //Caution: in this Eclipse vertion
   //Sheets are works not as expected
-  //differ from scala Read-Eval-Print-Loop console 
-  //some bugs / glitches will expected 
+  //differ from scala Read-Eval-Print-Loop console
+  //some bugs / glitches will expected
 
   //println("Welcome to the Scala worksheet")
 
-  //Write a tail-recursive version of sum.
+  /*Write a tail-recursive version of sum.*/
   //def trSum(f: Int => Int)(a: Int, b: Int): Int = {
   //too many parentethies ?
   def trSum(f: Int => Int, a: Int, b: Int) = {
@@ -25,11 +25,12 @@ object exercise {
     //loop(???, ???)
     loop(a, 0) //Ok.
 
-  } //> trSum: (f: Int => Int, a: Int, b: Int)Int
+  }                                               //> trSum: (f: Int => Int, a: Int, b: Int)Int
 
-  trSum(x => x, 1, 9) //> res0: Int = 45
+  trSum(x => x, 1, 9)                             //> res0: Int = 45
 
-  /**/ def myTRsum(f: Int => Int, a: Int, b: Int): Int = {
+  /**/
+  def myTRsum(f: Int => Int, a: Int, b: Int): Int = {
     //def id(x: Int): Int = x
     def fSum(x: Int): Int =
       f(x) + myTRsum(x => x, x + 1, b) //acc ?
@@ -56,6 +57,6 @@ object exercise {
   /** Unit test */
   def main(args: Array[String]): Unit = {
     println("sum(x => x, 1, 9) is: " + sum(x => x, 1, 9))
-  } //> main: (args: Array[String])Unit
+  }                                               //> main: (args: Array[String])Unit
 
 }

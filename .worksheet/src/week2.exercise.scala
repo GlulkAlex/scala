@@ -1,6 +1,6 @@
 package week2
 
-object exercise {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(670); 
+object exercise {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(672); 
   //Note:
   //Caution: in this Eclipse vertion
   //Sheets are works not as expected
@@ -9,7 +9,7 @@ object exercise {;import org.scalaide.worksheet.runtime.library.WorksheetSupport
 
   //println("Welcome to the Scala worksheet")
 
-  //Write a tail-recursive version of sum.
+  /*Write a tail-recursive version of sum.*/
   //def trSum(f: Int => Int)(a: Int, b: Int): Int = {
   //too many parentethies ?
   def trSum(f: Int => Int, a: Int, b: Int) = {
@@ -27,9 +27,10 @@ object exercise {;import org.scalaide.worksheet.runtime.library.WorksheetSupport
 
   };System.out.println("""trSum: (f: Int => Int, a: Int, b: Int)Int""");$skip(24); val res$0 = 
 
-  trSum(x => x, 1, 9);System.out.println("""res0: Int = """ + $show(res$0));$skip(224); 
+  trSum(x => x, 1, 9);System.out.println("""res0: Int = """ + $show(res$0));$skip(226); 
 
-  /**/ def myTRsum(f: Int => Int, a: Int, b: Int): Int = {
+  /**/
+  def myTRsum(f: Int => Int, a: Int, b: Int): Int = {
     //def id(x: Int): Int = x
     def fSum(x: Int): Int =
       f(x) + myTRsum(x => x, x + 1, b) //acc ?
