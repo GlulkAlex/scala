@@ -3,8 +3,6 @@ import math.Ordering
 //import scala.util.Sorting
 
 object implicitParametersTest {
-  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
-
   /*Currying
   transforms a function
   that takes multiple parameters into

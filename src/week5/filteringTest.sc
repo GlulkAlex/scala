@@ -85,6 +85,9 @@ object filteringTest {
       case Nil => Nil //not same list as 'xs'
       case x :: xs1 => {
         //name for parameters - matters -- may not be same as in 'pattern'
+        /*this is special notation for
+        using previosly declared values / variables in pattern
+        for example 'xs' with (') symbols */
         xs.takeWhile(z => z == x) :: pack(xs.dropWhile(z => z == x)) //*work as expected
       }
     }
@@ -179,8 +182,9 @@ object filteringTest {
 	        /*processed list is empty or it is last iteration*/
 	        /*final return value*/
 	        outputList
-	      } else if (!(inputList.head == sample)) { /*boolean condition,
-	        comparasion with current leftmost 'head'*/
+	      } else if (inputList.head != sample) {
+	      //*} else if (!(inputList.head == sample)) { /*boolean condition,
+	        //*comparasion with current leftmost 'head'*/
 	          //List(List(a, a, a, a), List(b))
 	          /*new 'sample' - new list element */
 	          loop(inputList.tail,

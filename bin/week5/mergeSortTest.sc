@@ -1,7 +1,6 @@
 package week5
 
 object mergeSortTest {
-  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
 
   def merge1(xs: List[Int], ys: List[Int]): List[Int] =
     xs match {
@@ -40,7 +39,8 @@ object mergeSortTest {
 
   /**
    * First MergeSort Implementation
-   * Here is the implementation of that algorithm in Scala:
+   * Here is
+   * the implementation of that algorithm in Scala:
    */
   def mSort(xs: List[Int]): List[Int] = {
     val n = xs.length / 2 //fraction / reminder is ommited / trown away

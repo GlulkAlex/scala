@@ -1,7 +1,7 @@
 package week5
 
-object mapTest {
-  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+object mapTest {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(76); 
+  println("Welcome to the Scala worksheet");$skip(325); 
 
   /**
    * Applying a finction to Elements of a List
@@ -12,7 +12,7 @@ object mapTest {
   def scaleList(xs: List[Double], factor: Double): List[Double] = xs match {
     case Nil => xs
     case y :: ys => y * factor :: scaleList(ys, factor)
-  }                                               //> scaleList: (xs: List[Double], factor: Double)List[Double]
+  };System.out.println("""scaleList: (xs: List[Double], factor: Double)List[Double]""");$skip(519); 
 
   /**
    * Map
@@ -34,22 +34,22 @@ object mapTest {
   def map2[T, U](xs: List[T], f: T => U): List[U] = xs match {
     case Nil => Nil //xs
     case y :: ys => f(y) :: map2(ys, f)
-  }                                               //> map2: [T, U](xs: List[T], f: T => U)List[U]
+  };System.out.println("""map2: [T, U](xs: List[T], f: T => U)List[U]""");$skip(191); 
 
   def scaleList2(xs: List[Double], factor: Double): List[Double] = {
     //*xs map (x => x * factor)
     map2(xs, (x: Double) => x / factor)
     //map2(this, (x: Double) => x / factor)
-  }                                               //> scaleList2: (xs: List[Double], factor: Double)List[Double]
+  };System.out.println("""scaleList2: (xs: List[Double], factor: Double)List[Double]""");$skip(131); 
 
   def squareList(xs: List[Int]): List[Int] = xs match {
     case Nil => xs //Nil
     case y :: ys => y * y :: squareList(ys)
-  }                                               //> squareList: (xs: List[Int])List[Int]
+  };System.out.println("""squareList: (xs: List[Int])List[Int]""");$skip(107); 
 
   def squareList1(xs: List[Int]): List[Int] =
     //*xs map (x => x * x)
-    map2(xs, (x: Int) => x * x)                   //> squareList1: (xs: List[Int])List[Int]
+    map2(xs, (x: Int) => x * x);System.out.println("""squareList1: (xs: List[Int])List[Int]""");$skip(660); 
 
   def squareList2(xs: List[Int]): List[Int] = {
     /**
@@ -70,11 +70,10 @@ object mapTest {
     //*}
 
     loop(tail = xs) //Named Parameters
-  }//works as expected /*possibly more time efficient*/
-                                                  //> squareList2: (xs: List[Int])List[Int]
+  };System.out.println("""squareList2: (xs: List[Int])List[Int]""");$skip(107); //works as expected /*possibly more time efficient*/
   def squareList3(xs: List[Int]): List[Int] =
     //*using predefined scala method
-    xs map (x => x * x)                           //> squareList3: (xs: List[Int])List[Int]
+    xs map (x => x * x);System.out.println("""squareList3: (xs: List[Int])List[Int]""");$skip(306); 
     
 	//benchmarking:
 	/*scala.testing.Benchmark trait is
@@ -85,26 +84,22 @@ object mapTest {
     val t1 = System.nanoTime()
     println("Elapsed time: " + (t1 - t0) + "ns")
     result
-  }                                               //> timeNano: [R](block: => R)R
+  };System.out.println("""timeNano: [R](block: => R)R""");$skip(51); 
 
-  val doubleList = List(1.0, 2.0, 3.0, 4.0, 5.0)  //> doubleList  : List[Double] = List(1.0, 2.0, 3.0, 4.0, 5.0)
-  val intList = List(-1, 2, -3, 4, -5)            //> intList  : List[Int] = List(-1, 2, -3, 4, -5)
+  val doubleList = List(1.0, 2.0, 3.0, 4.0, 5.0);System.out.println("""doubleList  : List[Double] = """ + $show(doubleList ));$skip(39); 
+  val intList = List(-1, 2, -3, 4, -5);System.out.println("""intList  : List[Int] = """ + $show(intList ));$skip(29); val res$0 = 
 
-  scaleList(doubleList, 2)                        //> res0: List[Double] = List(2.0, 4.0, 6.0, 8.0, 10.0)
-  scaleList2(doubleList, 3)                       //> res1: List[Double] = List(0.3333333333333333, 0.6666666666666666, 1.0, 1.33
-                                                  //| 33333333333333, 1.6666666666666667)
+  scaleList(doubleList, 2);System.out.println("""res0: List[Double] = """ + $show(res$0));$skip(28); val res$1 = 
+  scaleList2(doubleList, 3);System.out.println("""res1: List[Double] = """ + $show(res$1));$skip(24); val res$2 = 
 
-  squareList(intList)                             //> res2: List[Int] = List(1, 4, 9, 16, 25)
+  squareList(intList);System.out.println("""res2: List[Int] = """ + $show(res$2));$skip(42); val res$3 = 
   timeNano {
     squareList1(intList)
-  }                                               //> Elapsed time: 1553080ns
-                                                  //| res3: List[Int] = List(1, 4, 9, 16, 25)
+  };System.out.println("""res3: List[Int] = """ + $show(res$3));$skip(55); val res$4 = 
   timeNano {
     squareList2(intList)
-  }//? fastest ?                                  //> Elapsed time: 104014ns
-                                                  //| res4: List[Int] = List(1, 4, 9, 16, 25)
+  };System.out.println("""res4: List[Int] = """ + $show(res$4));$skip(42); val res$5 = //? fastest ?
   timeNano {
     squareList3(intList)
-  }                                               //> Elapsed time: 641925ns
-                                                  //| res5: List[Int] = List(1, 4, 9, 16, 25)
+  };System.out.println("""res5: List[Int] = """ + $show(res$5))}
 }

@@ -1,7 +1,7 @@
 package week5
 
-object filteringTest {
-  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
+object filteringTest {;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(82); 
+  println("Welcome to the Scala worksheet");$skip(327); 
 
   /**
    * Filtering
@@ -17,7 +17,7 @@ object filteringTest {
       } else {
         posElems(ys)
       }
-  }                                               //> posElems: (xs: List[Int])List[Int]
+  };System.out.println("""posElems: (xs: List[Int])List[Int]""");$skip(668); 
 
   /**
    * Filter
@@ -45,13 +45,13 @@ object filteringTest {
     } else {
       xs.filter(p)
     }
-  }                                               //> filter1: [T](xs: List[T])(p: T => Boolean)List[T]
+  };System.out.println("""filter1: [T](xs: List[T])(p: T => Boolean)List[T]""");$skip(169); 
 
   /*Using 'filter',
  'posElems' can be written more concisely*/
   def posElems2(xs: List[Int]): List[Int] =
     //xs filter1 (x => x > 0)
-    filter1(xs)(x => x <= 0)                      //> posElems2: (xs: List[Int])List[Int]
+    filter1(xs)(x => x <= 0);System.out.println("""posElems2: (xs: List[Int])List[Int]""");$skip(399); 
 
   /*function 'pack' that
   packs consecutive duplicates of list elements
@@ -67,18 +67,18 @@ object filteringTest {
     } else {
       false
     }
-  }                                               //> compare1: [T](sample: T, criteria: T)Boolean
+  };System.out.println("""compare1: [T](sample: T, criteria: T)Boolean""");$skip(159); 
 
   def compare2[T](sample: T, criteria: T): Boolean = {
     sample match {
       case criteria => true
       case _ => false
     }
-  } //not work as expected                        //> compare2: [T](sample: T, criteria: T)Boolean
+  };System.out.println("""compare2: [T](sample: T, criteria: T)Boolean""");$skip(91);  //not work as expected
 
   def compare3[T](sample: T, criteria: T): Boolean = {
     return sample == criteria
-  }                                               //> compare3: [T](sample: T, criteria: T)Boolean
+  };System.out.println("""compare3: [T](sample: T, criteria: T)Boolean""");$skip(463); 
 
   def pack[T](xs: List[T]): List[List[T]] = {
     xs match {
@@ -91,7 +91,7 @@ object filteringTest {
         xs.takeWhile(z => z == x) :: pack(xs.dropWhile(z => z == x)) //*work as expected
       }
     }
-  }                                               //> pack: [T](xs: List[T])List[List[T]]
+  };System.out.println("""pack: [T](xs: List[T])List[List[T]]""");$skip(444); 
 
   /**
    * Functions and Methods Implementation
@@ -107,7 +107,7 @@ object filteringTest {
         first :: pack3(rest)
       }
     }
-  }                                               //> pack3: [T](xs: List[T])List[List[T]]
+  };System.out.println("""pack3: [T](xs: List[T])List[List[T]]""");$skip(264); 
 
   /**
    * Functions and Methods Implementation
@@ -117,7 +117,7 @@ object filteringTest {
     //? 'x' as pattern matching on 'xs'
     //replacing each element of 'xs' by 'pair'
     pack3(xs) map (x => (x.head, x.length))
-  }                                               //> encode2: [T](xs: List[T])List[(T, Int)]
+  };System.out.println("""encode2: [T](xs: List[T])List[(T, Int)]""");$skip(2128); 
 
   def pack2[T](xs: List[T]): List[List[T]] = {
     /**
@@ -170,7 +170,7 @@ object filteringTest {
     //return: first :: pack(rest)
     //as: first1 :: (first2 :: (first3 ... )) :: Nill
     //where: firstN = (x :: x :: ... :: Nil)
-  } //work as expected                            //> pack2: [T](xs: List[T])List[List[T]]
+  };System.out.println("""pack2: [T](xs: List[T])List[List[T]]""");$skip(1219);  //work as expected
 
   def pack4[T](xs: List[T]): List[List[T]] = {
     //annotaton@tailrec
@@ -199,7 +199,7 @@ object filteringTest {
 	      }
 	    }
 	    loop(inputList = xs) //initialization
-  }//work as expected & better then 'pack2'       //> pack4: [T](xs: List[T])List[List[T]]
+  };System.out.println("""pack4: [T](xs: List[T])List[List[T]]""");$skip(1240); //work as expected & better then 'pack2'
 
   /*Using 'pack'
   write a function 'encode' that produce
@@ -238,7 +238,7 @@ object filteringTest {
         iter(xs, x) //initialization
       }
     }
-  } //work as expected                            //> encode: [T](xs: List[T])List[(T, Int)]
+  };System.out.println("""encode: [T](xs: List[T])List[(T, Int)]""");$skip(188);  //work as expected
 
   def loop[T](yS: List[T], counter: Int = 0): Int = {
     yS match {
@@ -247,91 +247,76 @@ object filteringTest {
         loop(zS, counter + 1)
       }
     }
-  } //work as expected                            //> loop: [T](yS: List[T], counter: Int)Int
+  };System.out.println("""loop: [T](yS: List[T], counter: Int)Int""");$skip(41);  //work as expected
 
-  val intList = List(-1, 2, -3, 4, -5)            //> intList  : List[Int] = List(-1, 2, -3, 4, -5)
+  val intList = List(-1, 2, -3, 4, -5);System.out.println("""intList  : List[Int] = """ + $show(intList ));$skip(84); 
   val consecList = List(
-    "a", "a", "a", "a", "b", "c", "c", "c", "d", "a", "a")
-                                                  //> consecList  : List[String] = List(a, a, a, a, b, c, c, c, d, a, a)
+    "a", "a", "a", "a", "b", "c", "c", "c", "d", "a", "a");System.out.println("""consecList  : List[String] = """ + $show(consecList ));$skip(22); val res$0 = 
 
-  posElems(intList)                               //> res0: List[Int] = List(2, 4)
-  posElems2(intList)                              //> res1: List[Int] = List(-1, -3, -5)
+  posElems(intList);System.out.println("""res0: List[Int] = """ + $show(res$0));$skip(21); val res$1 = 
+  posElems2(intList);System.out.println("""res1: List[Int] = """ + $show(res$1));$skip(37); val res$2 = 
 
-  intList filterNot (x => x == -3)                //> res2: List[Int] = List(-1, 2, 4, -5)
-  intList partition (x => x == -3)                //> res3: (List[Int], List[Int]) = (List(-3),List(-1, 2, 4, -5))
-  intList takeWhile (x => x > -3)                 //> res4: List[Int] = List(-1, 2)
-  intList dropWhile (x => x > -3)                 //> res5: List[Int] = List(-3, 4, -5)
-  intList span (x => x > -3)                      //> res6: (List[Int], List[Int]) = (List(-1, 2),List(-3, 4, -5))
-  consecList span (x => x == "a")                 //> res7: (List[String], List[String]) = (List(a, a, a, a),List(b, c, c, c, d, 
-                                                  //| a, a))
+  intList filterNot (x => x == -3);System.out.println("""res2: List[Int] = """ + $show(res$2));$skip(35); val res$3 = 
+  intList partition (x => x == -3);System.out.println("""res3: (List[Int], List[Int]) = """ + $show(res$3));$skip(34); val res$4 = 
+  intList takeWhile (x => x > -3);System.out.println("""res4: List[Int] = """ + $show(res$4));$skip(34); val res$5 = 
+  intList dropWhile (x => x > -3);System.out.println("""res5: List[Int] = """ + $show(res$5));$skip(29); val res$6 = 
+  intList span (x => x > -3);System.out.println("""res6: (List[Int], List[Int]) = """ + $show(res$6));$skip(34); val res$7 = 
+  consecList span (x => x == "a");System.out.println("""res7: (List[String], List[String]) = """ + $show(res$7));$skip(60); val res$8 = 
   //looks for prefix
-  consecList takeWhile (x => x == "a")            //> res8: List[String] = List(a, a, a, a)
+  consecList takeWhile (x => x == "a");System.out.println("""res8: List[String] = """ + $show(res$8));$skip(79); val res$9 = 
   //looks for suffix / postfix / ending
-  consecList dropWhile (x => x == "a")            //> res9: List[String] = List(b, c, c, c, d, a, a)
+  consecList dropWhile (x => x == "a");System.out.println("""res9: List[String] = """ + $show(res$9));$skip(185); val res$10 = 
 
-  /*Inﬁx Notation
+  /*In?x Notation
 	Any method with a parameter can be used like
-	an 'inﬁx operator'.
+	an 'in?x operator'.
 	It is therefore possible to write:
 	r add s  'as' r.add(s)*/
-  consecList.takeWhile(x => x == x)               //> res10: List[String] = List(a, a, a, a, b, c, c, c, d, a, a)
+  consecList.takeWhile(x => x == x);System.out.println("""res10: List[String] = """ + $show(res$10));$skip(60); val res$11 = 
   //runs in single traversal
-  consecList.span(x => x == x)                    //> res11: (List[String], List[String]) = (List(a, a, a, a, b, c, c, c, d, a, a
-                                                  //| ),List())
+  consecList.span(x => x == x);System.out.println("""res11: (List[String], List[String]) = """ + $show(res$11));$skip(65); val res$12 = 
   //runs in single traversal
-  consecList.partition(x => x == x)               //> res12: (List[String], List[String]) = (List(a, a, a, a, b, c, c, c, d, a, a
-                                                  //| ),List())
-  pack(consecList)                                //> res13: List[List[String]] = List(List(a, a, a, a), List(b), List(c, c, c), 
-                                                  //| List(d), List(a, a))
-  println("Expected: ")                           //> Expected: 
-  println("List(L('a', 'a', 'a', 'a'), L('b'), L('c', 'c', 'c'), L('d'), L('a', 'a'))")
-                                                  //> List(L('a', 'a', 'a', 'a'), L('b'), L('c', 'c', 'c'), L('d'), L('a', 'a'))
-                                                  //| 
-  pack3(consecList)                               //> res14: List[List[String]] = List(List(a, a, a, a), List(b), List(c, c, c), 
-                                                  //| List(d), List(a, a))
-  encode(consecList)                              //> res15: List[(String, Int)] = List((a,4), (b,1), (c,3), (d,1), (a,2))
-  println("Expected: List(('a', 4), ('b', 1), ('c', 3), ('d', 1), ('a', 2))")
-                                                  //> Expected: List(('a', 4), ('b', 1), ('c', 3), ('d', 1), ('a', 2))
-  compare1("a", "a")                              //> res16: Boolean = true
-  compare1("a", "b")                              //> res17: Boolean = false
-  compare1("a", 1)                                //> res18: Boolean = false
-  compare2("a", "a")                              //> res19: Boolean = true
-  compare2("a", "b")                              //> res20: Boolean = true
-  compare2("a", 1)                                //> res21: Boolean = true
-  compare3("a", "a")                              //> res22: Boolean = true
-  compare3("a", "b")                              //> res23: Boolean = false
-  compare3("a", 1)                                //> res24: Boolean = false
-  (1 :: Nil) :: (2 :: Nil) :: (3 :: Nil) :: Nil   //> res25: List[List[Int]] = List(List(1), List(2), List(3))
+  consecList.partition(x => x == x);System.out.println("""res12: (List[String], List[String]) = """ + $show(res$12));$skip(19); val res$13 = 
+  pack(consecList);System.out.println("""res13: List[List[String]] = """ + $show(res$13));$skip(24); 
+  println("Expected: ");$skip(88); 
+  println("List(L('a', 'a', 'a', 'a'), L('b'), L('c', 'c', 'c'), L('d'), L('a', 'a'))");$skip(20); val res$14 = 
+  pack3(consecList);System.out.println("""res14: List[List[String]] = """ + $show(res$14));$skip(21); val res$15 = 
+  encode(consecList);System.out.println("""res15: List[(String, Int)] = """ + $show(res$15));$skip(78); 
+  println("Expected: List(('a', 4), ('b', 1), ('c', 3), ('d', 1), ('a', 2))");$skip(21); val res$16 = 
+  compare1("a", "a");System.out.println("""res16: Boolean = """ + $show(res$16));$skip(21); val res$17 = 
+  compare1("a", "b");System.out.println("""res17: Boolean = """ + $show(res$17));$skip(19); val res$18 = 
+  compare1("a", 1);System.out.println("""res18: Boolean = """ + $show(res$18));$skip(21); val res$19 = 
+  compare2("a", "a");System.out.println("""res19: Boolean = """ + $show(res$19));$skip(21); val res$20 = 
+  compare2("a", "b");System.out.println("""res20: Boolean = """ + $show(res$20));$skip(19); val res$21 = 
+  compare2("a", 1);System.out.println("""res21: Boolean = """ + $show(res$21));$skip(21); val res$22 = 
+  compare3("a", "a");System.out.println("""res22: Boolean = """ + $show(res$22));$skip(21); val res$23 = 
+  compare3("a", "b");System.out.println("""res23: Boolean = """ + $show(res$23));$skip(19); val res$24 = 
+  compare3("a", 1);System.out.println("""res24: Boolean = """ + $show(res$24));$skip(48); val res$25 = 
+  (1 :: Nil) :: (2 :: Nil) :: (3 :: Nil) :: Nil;System.out.println("""res25: List[List[Int]] = """ + $show(res$25));$skip(37); val res$26 = 
   //*Nil.isEmpty
-  Nil :: (1 :: Nil)                               //> res26: List[Any] = List(List(), 1)
-  encode(Nil)                                     //> res27: List[(Nothing, Int)] = List()
-  encode(1 :: 'a' :: Nil)                         //> res28: List[(AnyVal, Int)] = List((1,1), (a,1))
-  encode(2 :: 2 :: 'a' :: 'a' :: 3 :: 3 :: 3 :: 'b' :: 7 :: 4 :: 4 :: 4 :: 4 :: 'c' :: 'c' :: Nil)
-                                                  //> res29: List[(AnyVal, Int)] = List((2,2), (a,2), (3,3), (b,1), (7,1), (4,4),
-                                                  //|  (c,2))
-  ('x', 1) :: Nil                                 //> res30: List[(Char, Int)] = List((x,1))
-  (('x', 1) :: Nil) :: Nil                        //> res31: List[List[(Char, Int)]] = List(List((x,1)))
+  Nil :: (1 :: Nil);System.out.println("""res26: List[Any] = """ + $show(res$26));$skip(14); val res$27 = 
+  encode(Nil);System.out.println("""res27: List[(Nothing, Int)] = """ + $show(res$27));$skip(26); val res$28 = 
+  encode(1 :: 'a' :: Nil);System.out.println("""res28: List[(AnyVal, Int)] = """ + $show(res$28));$skip(99); val res$29 = 
+  encode(2 :: 2 :: 'a' :: 'a' :: 3 :: 3 :: 3 :: 'b' :: 7 :: 4 :: 4 :: 4 :: 4 :: 'c' :: 'c' :: Nil);System.out.println("""res29: List[(AnyVal, Int)] = """ + $show(res$29));$skip(18); val res$30 = 
+  ('x', 1) :: Nil;System.out.println("""res30: List[(Char, Int)] = """ + $show(res$30));$skip(27); val res$31 = 
+  (('x', 1) :: Nil) :: Nil;System.out.println("""res31: List[List[(Char, Int)]] = """ + $show(res$31));$skip(148); 
   //*List(List(('x', 1)))
   //*List(List(('x', 1))).last
   //*List(List(('x', 1))).last.last
 
-  val (name, value) = List(List(('x', 1))).last.last
-                                                  //> name  : Char = x
-                                                  //| value  : Int = 1
+  val (name, value) = List(List(('x', 1))).last.last;System.out.println("""name  : Char = """ + $show(name ));System.out.println("""value  : Int = """ + $show(value ));$skip(73); val res$32 = 
   //Returns all elements except last 'n' ones.
-  consecList.dropRight(1)                         //> res32: List[String] = List(a, a, a, a, b, c, c, c, d, a)
-  consecList.dropRight(1) ::: List("x")           //> res33: List[String] = List(a, a, a, a, b, c, c, c, d, a, x)
-  consecList.drop(1)                              //> res34: List[String] = List(a, a, a, b, c, c, c, d, a, a)
+  consecList.dropRight(1);System.out.println("""res32: List[String] = """ + $show(res$32));$skip(40); val res$33 = 
+  consecList.dropRight(1) ::: List("x");System.out.println("""res33: List[String] = """ + $show(res$33));$skip(21); val res$34 = 
+  consecList.drop(1);System.out.println("""res34: List[String] = """ + $show(res$34));$skip(44); val res$35 = 
   //*loop(consecList)
-  encode2(consecList)                             //> res35: List[(String, Int)] = List((a,4), (b,1), (c,3), (d,1), (a,2))
+  encode2(consecList);System.out.println("""res35: List[(String, Int)] = """ + $show(res$35));$skip(44); val res$36 = 
   //*consecList.reverse
-  pack2(consecList)                               //> res36: List[List[String]] = List(List(a, a, a, a), List(b), List(c, c, c), 
-                                                  //| List(d), List(a, a))
-  pack2(Nil)                                      //> res37: List[List[Nothing]] = List(List())
+  pack2(consecList);System.out.println("""res36: List[List[String]] = """ + $show(res$36));$skip(13); val res$37 = 
+  pack2(Nil);System.out.println("""res37: List[List[Nothing]] = """ + $show(res$37));$skip(150); val res$38 = 
   //*pack2(consecList).last
   //*val lastZ = "z" :: pack2(consecList).last
   //*pack2(consecList).dropRight(1) ::: (lastZ :: Nil)
-  pack4(consecList)                               //> res38: List[List[String]] = List(List(a, a, a, a), List(b), List(c, c, c), 
-                                                  //| List(d), List(a, a))
-  pack4(Nil)                                      //> res39: List[List[Nothing]] = List()
+  pack4(consecList);System.out.println("""res38: List[List[String]] = """ + $show(res$38));$skip(13); val res$39 = 
+  pack4(Nil);System.out.println("""res39: List[List[Nothing]] = """ + $show(res$39))}
 }

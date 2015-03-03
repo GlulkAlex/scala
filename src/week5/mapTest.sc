@@ -56,7 +56,7 @@ object mapTest {
      * 'head' as accumulator
      * //@tailrec
      */
-    def loop(head: List[Int] = Nil, tail: List[Int]): List[Int] = {
+    def loop(head: List[Int] = Nil, tail: List[Int]): List[Int] = //*{
       //condition check:
       tail match {
         //base case - return end / final value
@@ -67,7 +67,7 @@ object mapTest {
           loop(head = head ::: (y * y :: Nil), tail = ys) //y * y :: squareList(ys)
         }
       }
-    }
+    //*}
 
     loop(tail = xs) //Named Parameters
   }//works as expected /*possibly more time efficient*/
@@ -97,14 +97,14 @@ object mapTest {
   squareList(intList)                             //> res2: List[Int] = List(1, 4, 9, 16, 25)
   timeNano {
     squareList1(intList)
-  }                                               //> Elapsed time: 1551715ns
+  }                                               //> Elapsed time: 1553080ns
                                                   //| res3: List[Int] = List(1, 4, 9, 16, 25)
   timeNano {
     squareList2(intList)
-  }                                               //> Elapsed time: 100742ns
+  }//? fastest ?                                  //> Elapsed time: 104014ns
                                                   //| res4: List[Int] = List(1, 4, 9, 16, 25)
   timeNano {
     squareList3(intList)
-  }                                               //> Elapsed time: 635462ns
+  }                                               //> Elapsed time: 641925ns
                                                   //| res5: List[Int] = List(1, 4, 9, 16, 25)
 }
