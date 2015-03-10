@@ -67,4 +67,9 @@ object testMap {
   (x3 − 2x + 5) as map:*/
   Map( 0 -> 5, 1 -> -2, 3 -> 1 )                  //> res19: scala.collection.immutable.Map[Int,Int] = Map(0 -> 5, 1 -> -2, 3 -> 
                                                   //| 1)
+  /*duplicated values
+  in 'keys' are
+  dropped / ommited like in 'Set'
+  only unique remains*/
+  Map( 0 -> 5, 0 -> -2, 0 -> 5, 1 -> 5)           //> res20: scala.collection.immutable.Map[Int,Int] = Map(0 -> 5, 1 -> 5)
 }
