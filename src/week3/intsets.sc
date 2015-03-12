@@ -114,9 +114,9 @@ object Empty extends IntSet {
 }
 
 /** assumption on tree structure:
-  * @left < @elem <@right
-  * where @elem is root node
-  * @left & @right is subtree or leafs
+  * @note   `left` < `elem` < `right`
+  * @param  where `elem` is root node
+  * @param  `left` & `right` is subtree or `leafs`
   */
 class NonEmpty( elem: Int,
                 left: IntSet,

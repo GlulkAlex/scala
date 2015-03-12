@@ -126,22 +126,22 @@ object streamsTest {
   /*to ﬁnd the second prime number between 'from' & 'to'*/
   timeNano(
     ( ( 100 to 300 ) filter isPrime )( 1 )
-  )                                               //> Elapsed time: 9849986ns
+  )                                               //> Elapsed time: 10194041ns
                                                   //| res10: Int = 103
 
   timeNano(
     ( ( 100 to 300 ) filter isPrime ).apply( 1 )
-  )                                               //> Elapsed time: 1956840ns
+  )                                               //> Elapsed time: 1953740ns
                                                   //| res11: Int = 103
 
   timeNano(
     ( streamRange( 100, 300 ) filter isPrime ) apply 1
-  )                                               //> 100 101 102 103 Elapsed time: 1313687ns
+  )                                               //> 100 101 102 103 Elapsed time: 1405342ns
                                                   //| res12: Int = 103
 
   timeNano(
     ( ( 100 to 300 ).toStream filter isPrime )( 1 )
-  )                                               //> Elapsed time: 729862ns
+  )                                               //> Elapsed time: 723900ns
                                                   //| res13: Int = 103
   /*we can
   make the short-code effcient by
@@ -151,7 +151,12 @@ object streamsTest {
     for the evaluation result
     (which might be never)*/
   isPrime( 101 )                                  //> res14: Boolean = true
-  ( 100 to 300 ).filter( isPrime( _ ) )           //> res15: scala.collection.immutable.IndexedSeq[Int] = Vector(101, 103, 107, 1
+  isPrime( 1001 )                                 //> res15: Boolean = false
+  1001 % 3                                        //> res16: Int(2) = 2
+  1001 % 7                                        //> res17: Int(0) = 0
+  isPrime( 1009 )                                 //> res18: Boolean = true
+  isPrime( 1013 )                                 //> res19: Boolean = true
+  ( 100 to 300 ).filter( isPrime( _ ) )           //> res20: scala.collection.immutable.IndexedSeq[Int] = Vector(101, 103, 107, 1
                                                   //| 09, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 1
                                                   //| 93, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 2
                                                   //| 77, 281, 283, 293)
@@ -171,6 +176,6 @@ object streamsTest {
 
   timeNano(
     secondPrime( 100, 300 )
-  )                                               //> Elapsed time: 54653ns
-                                                  //| res16: Int = 103
+  )                                               //> Elapsed time: 47939ns
+                                                  //| res21: Int = 103
 }
