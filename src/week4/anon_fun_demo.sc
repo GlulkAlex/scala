@@ -2,29 +2,38 @@
 package week4 {
 
   object anon_fun_demo {
-    println("Welcome to the Scala worksheet")     //> Welcome to the Scala worksheet
-
+    /*Meet 'lambda'.
+	  Scala provides a relatively lightweight syntax for
+	  defining 'anonymous functions'.
+	  'Anonymous functions' in source code are called
+	  'function literals' and
+	  at run time, 'function literals' are
+	  instantiated into 'objects' called
+	  'function values'.*/
     //?return type deduced from
     //?function body
-    val f1 = (x: Int) => x * x                    //> f1  : Int => Int = <function1>
-    f1(3)                                         //> res0: Int = 9
+    val f1 = ( x: Int ) => x * x                  //> f1  : Int => Int = <function1>
+
+    f1( 3 )                                       //> res0: Int = 9
 
     //?<function1> generic type
     //?arg(0) for input parameter type
     //?arg(1) for return value type
-    val f = new Function1[Int, Int] {
-      def apply(x: Int) = x * x
+    val f = new Function1[ Int, Int ] {
+      def apply( x: Int ) = x * x
     }                                             //> f  : Int => Int = <function1>
-    f.apply(7)                                    //> res1: Int = 49
+
+    f.apply( 7 )                                  //> res1: Int = 49
 
     val f2 = {
-      class AnonFun extends Function1[Int, Int] {
-        def apply(x: Int) = x * x
+      class AnonFun extends Function1[ Int, Int ] {
+        def apply( x: Int ) = x * x
       }
       //?return (last expression)
       //?instance of AnonFun
       new AnonFun
     }                                             //> f2  : Int => Int = <function1>
-    f2(5)                                         //> res2: Int = 25
+
+    f2( 5 )                                       //> res2: Int = 25
   }
 }

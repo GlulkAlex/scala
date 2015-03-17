@@ -93,8 +93,22 @@ abstract class IntSet {
 //created by first reference to it
 //Singleton objects are values, so 'Empty' evaluates to itself.*/
 //?object and class with same name - conflicts ?
+/*An object that has the same name as class is called
+a 'companion object',
+it is used to
+contain 'factories' for the class that it complements.
+*/
 //?or object not able / override replace class ?
+/*A 'companion object' stores
+'shared' variables and values for
+every instantiated class to share.*/
+//?like 'closure' in JS?
+/*A 'companion object' can also
+see 'private'
+values and variables of the instantiated objects*/
+
 /** 'Empty' as singleton
+  * An 'object' is a singleton.
   */
 object Empty extends IntSet {
   def contains( x: Int ): Boolean = false

@@ -1,8 +1,6 @@
 package week5
 
 object mapTest {
-  println("Welcome to the Scala worksheet")       //> Welcome to the Scala worksheet
-
   /**
    * Applying a finction to Elements of a List
    * A common operation is
@@ -97,14 +95,14 @@ object mapTest {
   squareList(intList)                             //> res2: List[Int] = List(1, 4, 9, 16, 25)
   timeNano {
     squareList1(intList)
-  }                                               //> Elapsed time: 1553080ns
+  }                                               //> Elapsed time: 10883846ns
                                                   //| res3: List[Int] = List(1, 4, 9, 16, 25)
   timeNano {
     squareList2(intList)
-  }//? fastest ?                                  //> Elapsed time: 104014ns
+  }//? fastest ?                                  //> Elapsed time: 105245ns
                                                   //| res4: List[Int] = List(1, 4, 9, 16, 25)
   timeNano {
     squareList3(intList)
-  }                                               //> Elapsed time: 641925ns
+  }                                               //> Elapsed time: 13411131ns
                                                   //| res5: List[Int] = List(1, 4, 9, 16, 25)
 }

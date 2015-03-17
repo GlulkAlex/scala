@@ -22,3 +22,10 @@ project/plugins/project/
 .worksheet/*
 # not so much to save from here, not important
 .settings
+
+# exclude everything 
+/*
+# except directory foo/bar
+!/scr
+!*.md
+!*.txt
